@@ -1,0 +1,63 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #080807;
+  --surface: #12110e;
+  --surface-elevated: #1a1915;
+  --border: #26241e;
+  --border-subtle: #1c1a15;
+  --muted: #969085;
+  --foreground: #f2ede4;
+  --accent: #e69d43;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0908;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #26231e;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a362f;
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #e69d43;
+  outline-offset: 3px;
+}
+
+/* Selection */
+::selection {
+  background-color: #e69d43;
+  color: #080807;
+}
