@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "tsx tests/ai-assistant.test.ts"
+    "test": "tsx tests/ai-assistant.test.ts && tsx tests/api-chat.test.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
