@@ -39,15 +39,17 @@ export async function POST(req: NextRequest) {
     // Limit conversation context to last 6 messages
     const recentHistory = messages.slice(-6);
 
-    const geminiKey = process.env.GEMINI_API_KEY;
-    const openaiKey = process.env.OPENAI_API_KEY;
+    const geminiKey = process.env.GEMINI_API_KEY?.trim();
+    const openaiKey = process.env.OPENAI_API_KEY?.trim();
 
     // 1. If Google Gemini API Key is provided
     if (geminiKey) {
       const candidateModels = [
-        'gemini-2.5-flash',
+        'gemini-3.8-flash',
+        'gemini-3.5-flash',
         'gemini-flash-latest',
-        'gemini-1.5-flash',
+        'gemini-3.1-flash-lite',
+        'gemini-2.5-flash-lite',
       ];
 
       for (const model of candidateModels) {
@@ -69,7 +71,7 @@ export async function POST(req: NextRequest) {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ contents }),
-              signal: AbortSignal.timeout(6000),
+              signal: AbortSignal.timeout(5000),
             }
           );
 
@@ -87,7 +89,7 @@ export async function POST(req: NextRequest) {
             }
           }
         } catch (e) {
-          // Try next model or proceed to fallback
+          // Try next model or fallback
         }
       }
     }
@@ -110,7 +112,7 @@ export async function POST(req: NextRequest) {
             temperature: 0.3,
             max_tokens: 500,
           }),
-          signal: AbortSignal.timeout(6000),
+          signal: AbortSignal.timeout(5000),
         });
 
         if (openaiRes.ok) {
@@ -129,8 +131,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Deterministic Knowledge-Based Fallback
-    // Accurate, grounded responses based strictly on Leopold's verified data
+    // 3. High-Accuracy Deterministic Knowledge-Based Engine
+    // Directly answers with verified facts (location, projects, skills, education, contact)
     const fallback = getDeterministicAnswer(lastUserMessage);
 
     return NextResponse.json({
