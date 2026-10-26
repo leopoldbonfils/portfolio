@@ -244,8 +244,8 @@ export default function AIChatWidget() {
               <div className="text-[10px] font-mono text-[#787164] uppercase tracking-wider mb-1.5">
                 Suggested Questions
               </div>
-              <div className="flex flex-wrap gap-1">
-                {suggestedQuestions.slice(0, 4).map((q, qIdx) => (
+              <div className="flex flex-wrap gap-1 max-h-24 overflow-y-auto">
+                {suggestedQuestions.map((q, qIdx) => (
                   <button
                     key={qIdx}
                     type="button"

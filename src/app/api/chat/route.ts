@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { AI_SYSTEM_PROMPT, getDeterministicAnswer } from '@/lib/ai-assistant';
-
-interface ChatMessage {
-  role: 'user' | 'assistant' | 'system';
-  content: string;
-}
+import { AI_SYSTEM_PROMPT, getDeterministicAnswer, ChatMessage } from '@/lib/ai-assistant';
 
 export async function POST(req: NextRequest) {
   try {
@@ -42,7 +37,7 @@ export async function POST(req: NextRequest) {
     const geminiKey = process.env.GEMINI_API_KEY?.trim();
     const openaiKey = process.env.OPENAI_API_KEY?.trim();
 
-    // 1. If Google Gemini API Key is provided
+    // 1. Google Gemini Provider
     if (geminiKey) {
       const candidateModels = [
         'gemini-3.8-flash',
@@ -54,15 +49,22 @@ export async function POST(req: NextRequest) {
 
       for (const model of candidateModels) {
         try {
+          // Format multi-turn conversation with system instruction
+          const formattedHistory = recentHistory.map((m) => ({
+            role: m.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: m.content }],
+          }));
+
           const contents = [
             {
               role: 'user',
-              parts: [
-                {
-                  text: `${AI_SYSTEM_PROMPT}\n\nVisitor Question: ${lastUserMessage}`,
-                },
-              ],
+              parts: [{ text: `SYSTEM INSTRUCTIONS:\n${AI_SYSTEM_PROMPT}` }],
             },
+            {
+              role: 'model',
+              parts: [{ text: 'Understood. I will answer strictly and truthfully according to Leopold Mugisha’s verified knowledge base.' }],
+            },
+            ...formattedHistory,
           ];
 
           const geminiRes = await fetch(
@@ -94,7 +96,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 2. If OpenAI / OpenRouter API Key is provided
+    // 2. OpenAI / OpenRouter Provider
     if (openaiKey) {
       try {
         const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -131,9 +133,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. High-Accuracy Deterministic Knowledge-Based Engine
-    // Directly answers with verified facts (location, projects, skills, education, contact)
-    const fallback = getDeterministicAnswer(lastUserMessage);
+    // 3. High-Accuracy Deterministic Knowledge-Based Engine with Conversation Memory
+    const fallback = getDeterministicAnswer(lastUserMessage, recentHistory);
 
     return NextResponse.json({
       role: 'assistant',
