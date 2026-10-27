@@ -120,7 +120,7 @@ async function runApiTests() {
       process.env.OPENAI_API_KEY = '';
 
       const mockGeminiReply =
-        'Mocked Gemini response: Leopold Mugisha is a software engineer studying at AUCA.';
+        'Mocked Gemini response: Leopold Mugisha is a software engineer based in Kigali.';
 
       global.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
         const urlStr = input.toString();

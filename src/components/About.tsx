@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React from 'react';
 import { BookOpen, MapPin, GraduationCap, Code2, Globe } from 'lucide-react';
@@ -62,14 +62,14 @@ export default function About() {
                   <GraduationCap className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs text-[#7f786c] font-mono">Academic Enrollment</div>
+                  <div className="text-xs text-[#7f786c] font-mono">Degree & Specialization</div>
                   <div className="text-sm font-semibold text-[#f0ebe0]">
-                    Adventist University of Central Africa (AUCA)
+                    B.Sc. in Software Engineering
                   </div>
                 </div>
               </div>
               <p className="text-xs text-[#8c8477]">
-                B.Sc. in Software Engineering (2023–2026). In-depth coursework in Distributed Systems, PL/SQL, Java OOP, and Software Architecture.
+                Software Engineering student (2023–2026). In-depth coursework in Distributed Systems, PL/SQL, Java OOP, and Software Architecture.
               </p>
             </div>
 

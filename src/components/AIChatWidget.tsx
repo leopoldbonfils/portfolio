@@ -18,7 +18,7 @@ export default function AIChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: `Hello! I am Bobo Assistance, Leopold Mugisha's AI portfolio assistant. Ask me about his verified full-stack projects, database architectures, education at AUCA, or contact details.`,
+      content: `Hello! I am Bobo Assistance, Leopold Mugisha's AI portfolio assistant. Ask me about his verified full-stack projects, database architectures, educational background, or contact details.`,
     },
   ]);
 
@@ -111,7 +111,7 @@ export default function AIChatWidget() {
     setMessages([
       {
         role: 'assistant',
-        content: `Hello! I am Bobo Assistance, Leopold Mugisha's AI portfolio assistant. Ask me about his verified full-stack projects, database architectures, education at AUCA, or contact details.`,
+        content: `Hello! I am Bobo Assistance, Leopold Mugisha's AI portfolio assistant. Ask me about his verified full-stack projects, database architectures, educational background, or contact details.`,
       },
     ]);
   }
@@ -307,7 +307,7 @@ export default function AIChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask Bobo Assistance about projects, skills, AUCA, contact..."
+                placeholder="Ask Bobo Assistance about projects, skills, education, contact..."
                 className="w-full pl-3 pr-10 py-2 rounded-lg bg-[#181611] border border-[#2d2820] text-xs text-[#f2ede4] placeholder-[#6b6456] focus:border-accent focus:outline-none resize-none"
               />
               <button

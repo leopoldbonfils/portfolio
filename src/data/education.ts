@@ -1,4 +1,4 @@
-﻿export interface EducationItem {
+export interface EducationItem {
   period: string;
   institution: string;
   credential: string;
@@ -15,7 +15,7 @@ export const educationList: EducationItem[] = [
     details: [
       'Comprehensive study of computer science fundamentals, software architecture, and algorithm analysis.',
       'Key Coursework: Object-Oriented Programming (Java), Database Systems & PL/SQL, Distributed Systems, Web & Mobile Engineering, Operating Systems.',
-      'Active collaborator on university software initiatives including the AUCA Intranet campus project.'
+      'Active collaborator on university software initiatives including the campus intranet project.'
     ]
   },
   {

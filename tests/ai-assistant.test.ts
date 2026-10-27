@@ -151,7 +151,7 @@ runAssertion({
 runAssertion({
   category: 'Profile & Biography',
   query: 'Who is Leopold Mugisha?',
-  expectedKeywords: ['Mugisha Leopold Bonfils', 'AUCA', 'Software Engineering'],
+  expectedKeywords: ['Mugisha Leopold Bonfils', 'Software Engineering'],
   minSources: 2,
   expectedSourceUrls: ['github.com', 'linkedin.com'],
 });
@@ -212,7 +212,7 @@ runAssertion({
 runAssertion({
   category: 'Technical Skills',
   query: 'Has he built mobile apps?',
-  expectedKeywords: ['React Native', 'AUCA Intranet'],
+  expectedKeywords: ['React Native', 'Campus Intranet'],
   minSources: 1,
   expectedSourceUrls: ['auca-intranet-app'],
 });
@@ -225,7 +225,7 @@ runAssertion({
   query: 'What projects has he built?',
   expectedKeywords: [
     'Hazard Management System',
-    'AUCA Intranet App',
+    'Campus Intranet App',
     'Oracle SQL Employee Management',
     'Driver Permit Booking',
   ],
@@ -308,7 +308,7 @@ runAssertion({
 runAssertion({
   category: 'Experience & Journey',
   query: 'What is his experience level?',
-  expectedKeywords: ['AUCA', 'Software Engineer'],
+  expectedKeywords: ['Software Engineer'],
   forbiddenKeywords: ['20 years', 'decade of corporate'],
   minSources: 1,
   expectedSourceUrls: ['#experience'],
@@ -404,7 +404,7 @@ const mobileHistory: ChatMessage[] = [
   { role: 'user', content: 'Tell me about his mobile application' },
   {
     role: 'assistant',
-    content: 'Leopold built the AUCA Intranet App in React Native and Node.js.',
+    content: 'Leopold built the Campus Intranet App in React Native and Node.js.',
   },
 ];
 
@@ -412,7 +412,7 @@ runAssertion({
   category: 'Contextual Follow-up (With History)',
   query: 'What backend does it use?',
   history: mobileHistory,
-  expectedKeywords: ['Node.js', 'Express', 'AUCA Intranet App'],
+  expectedKeywords: ['Node.js', 'Express', 'Campus Intranet Mobile App'],
   minSources: 1,
   expectedSourceUrls: ['auca-intranet-app'],
 });
@@ -441,7 +441,7 @@ runAssertion({
   category: 'Context Follow-up (Missing Context)',
   query: 'What database did he use in it?',
   history: [], // No history provided!
-  expectedKeywords: ['which project', 'Hazard Management System', 'AUCA Intranet App'],
+  expectedKeywords: ['which project', 'Hazard Management System', 'Campus Intranet App'],
   expectMissingInfo: true,
   minSources: 1,
   expectedSourceUrls: ['#projects'],
@@ -477,7 +477,7 @@ runAssertion({
 runAssertion({
   category: 'Negative: Unsupported Employment',
   query: 'Did Leopold work at Google or Apple as a Senior Engineer?',
-  expectedKeywords: ['not been employed', 'Google', 'AUCA'],
+  expectedKeywords: ['not been employed', 'Google'],
   expectMissingInfo: true,
   minSources: 1,
   expectedSourceUrls: ['#experience'],
@@ -622,7 +622,7 @@ runAssertion({
 runAssertion({
   category: 'Spelling & Natural Language',
   query: 'auca mobil app',
-  expectedKeywords: ['AUCA Intranet App', 'React Native'],
+  expectedKeywords: ['Campus Intranet Mobile App', 'React Native'],
   minSources: 1,
 });
 
@@ -672,7 +672,7 @@ const suggestedExpected: Record<
   { expectedKeywords: string[]; minSources: number; expectedUrlSubstrings: string[] }
 > = {
   'Who is Leopold Mugisha?': {
-    expectedKeywords: ['Mugisha Leopold Bonfils', 'AUCA', 'Software Engineering'],
+    expectedKeywords: ['Mugisha Leopold Bonfils', 'Software Engineering'],
     minSources: 2,
     expectedUrlSubstrings: ['github.com', 'linkedin.com'],
   },
@@ -684,7 +684,7 @@ const suggestedExpected: Record<
   'What real projects has he built?': {
     expectedKeywords: [
       'Hazard Management System',
-      'AUCA Intranet App',
+      'Campus Intranet App',
       'Oracle SQL Employee Management',
     ],
     minSources: 2,
@@ -695,7 +695,7 @@ const suggestedExpected: Record<
     minSources: 2,
     expectedUrlSubstrings: ['hazard-management-system'],
   },
-  'Explain his AUCA Intranet mobile app.': {
+  'Explain his Campus Intranet mobile app.': {
     expectedKeywords: ['React Native', 'Node.js', 'MySQL'],
     minSources: 2,
     expectedUrlSubstrings: ['auca-intranet-app'],

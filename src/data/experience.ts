@@ -1,4 +1,4 @@
-﻿export interface ExperienceItem {
+export interface ExperienceItem {
   period: string;
   role: string;
   organization: string;
@@ -13,7 +13,7 @@ export const experienceList: ExperienceItem[] = [
   {
     period: '2023 — Present',
     role: 'Student Software Engineer & System Architect',
-    organization: 'Adventist University of Central Africa (AUCA)',
+    organization: 'Academic & Collaborative Engineering Projects',
     type: 'Software Engineering',
     location: 'Kigali, Rwanda',
     description: 'Designing full-stack, distributed, and database-driven solutions addressing real regional challenges in Rwanda and university administration.',
@@ -21,7 +21,7 @@ export const experienceList: ExperienceItem[] = [
     highlights: [
       'Architected Java RMI distributed client-server application for disaster hazard coordination during Rubavu district flooding.',
       'Authored production-level Oracle PL/SQL stored procedures and automated audit triggers for enterprise employee management.',
-      'Contributed to the AUCA Intranet mobile application for centralized student scheduling and grade communications.',
+      'Contributed to the Campus Intranet mobile application for centralized student scheduling and grade communications.',
       'Built and open-sourced driving permit booking and license preparation software in PHP & MySQL.'
     ]
   },

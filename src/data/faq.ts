@@ -22,7 +22,7 @@ export const faqList: FAQItem[] = [
     question: 'Who is Leopold Mugisha?',
     category: 'Profile & Biography',
     keywords: ['who', 'leopold', 'mugisha', 'bonfils', 'about', 'bio', 'profile', 'developer', 'identity'],
-    answer: 'Leopold Mugisha (Mugisha Leopold Bonfils) is a Full-Stack Developer and Software Engineering student at the Adventist University of Central Africa (AUCA) in Kigali, Rwanda. He specializes in distributed Java systems (Java RMI), enterprise relational databases (Oracle PL/SQL & MySQL), cross-platform mobile apps (React Native), and modern responsive web applications (Next.js, React, PHP).',
+    answer: 'Leopold Mugisha (Mugisha Leopold Bonfils) is a Full-Stack Developer and Software Engineering student in Kigali, Rwanda. He specializes in distributed Java systems (Java RMI), enterprise relational databases (Oracle PL/SQL & MySQL), cross-platform mobile apps (React Native), and modern responsive web applications (Next.js, React, PHP).',
     relevantLinks: [
       { label: 'GitHub Profile', url: 'https://github.com/leopoldbonfils' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/mugisha-leopold-697124420/' },
@@ -70,10 +70,10 @@ export const faqList: FAQItem[] = [
     ],
   },
   {
-    question: 'What coursework has Leopold completed at AUCA?',
+    question: 'What coursework has Leopold completed in software engineering?',
     category: 'Education & Academics',
     keywords: ['coursework', 'subjects', 'courses', 'classes', 'curriculum', 'algorithms', 'database course', 'distributed course'],
-    answer: 'His university curriculum at AUCA includes Distributed Systems & Network Programming (Java RMI), Database Management Systems (Oracle SQL, PL/SQL, and MySQL), Object-Oriented Software Engineering (Java), Data Structures & Algorithms, Web Development, Mobile Application Development, and Operating Systems.',
+    answer: 'His university curriculum includes Distributed Systems & Network Programming (Java RMI), Database Management Systems (Oracle SQL, PL/SQL, and MySQL), Object-Oriented Software Engineering (Java), Data Structures & Algorithms, Web Development, Mobile Application Development, and Operating Systems.',
     relevantLinks: [
       { label: 'Education Section', url: '#education' },
     ],
@@ -103,7 +103,7 @@ export const faqList: FAQItem[] = [
     question: 'What is his experience with database design and PL/SQL?',
     category: 'Technical Skills',
     keywords: ['database', 'plsql', 'pl/sql', 'oracle', 'sql', 'mysql', 'trigger', 'stored procedure', 'normalization'],
-    answer: 'Leopold has extensive practical database experience. In Oracle SQL and PL/SQL, he authored production-grade database systems with stored procedures, packaged functions, parameter validation, and recursive audit trail triggers that avoid mutating-table exceptions. In MySQL, he designed normalized (3NF) relational schemas for the AUCA Intranet mobile app, Hazard Management System, and Permit Booking portal.',
+    answer: 'Leopold has extensive practical database experience. In Oracle SQL and PL/SQL, he authored production-grade database systems with stored procedures, packaged functions, parameter validation, and recursive audit trail triggers that avoid mutating-table exceptions. In MySQL, he designed normalized (3NF) relational schemas for the Campus Intranet mobile app, Hazard Management System, and Permit Booking portal.',
     relevantLinks: [
       { label: 'Oracle PL/SQL Repository', url: 'https://github.com/leopoldbonfils/oracle_sql_employee_management_system' },
       { label: 'Skills Section', url: '#skills' },
@@ -113,9 +113,9 @@ export const faqList: FAQItem[] = [
     question: 'Has Leopold built any mobile applications?',
     category: 'Technical Skills',
     keywords: ['mobile', 'react native', 'app', 'android', 'ios', 'cross-platform', 'mobile developer'],
-    answer: 'Yes. Leopold contributed to the AUCA Intranet App, a cross-platform mobile application developed with React Native and Node.js. It features student authentication, offline course schedule caching, push notices, and grade inquiry channels.',
+    answer: 'Yes. Leopold contributed to the Campus Intranet App, a cross-platform mobile application developed with React Native and Node.js. It features student authentication, offline course schedule caching, push notices, and grade inquiry channels.',
     relevantLinks: [
-      { label: 'AUCA Intranet App Repo', url: 'https://github.com/Danieljospin1/Auca_intranet_app' },
+      { label: 'Campus Intranet App Repo', url: 'https://github.com/Danieljospin1/Auca_intranet_app' },
       { label: 'Mobile Case Study', url: '/projects/auca-intranet-app' },
     ],
   },
@@ -125,7 +125,7 @@ export const faqList: FAQItem[] = [
     question: 'What real projects has Leopold built?',
     category: 'Verified Projects',
     keywords: ['projects', 'built', 'portfolio', 'showcase', 'work', 'code', 'systems', 'repositories'],
-    answer: 'Leopold has built six verified open-source and collaborative software projects:\n1. Hazard Management System (Java RMI & MySQL for flood disaster coordination in Rubavu)\n2. AUCA Intranet App (React Native mobile portal for university academic schedules)\n3. Oracle SQL Employee Management System (enterprise PL/SQL procedures & audit triggers)\n4. Online Driver Permit Booking System (PHP/MySQL appointment booking platform)\n5. Provisoire-Exam Platform (interactive driving license test simulator in PHP & JS)\n6. FilmNet (modern streaming discovery catalog in JS & PHP).',
+    answer: 'Leopold has built six verified open-source and collaborative software projects:\n1. Hazard Management System (Java RMI & MySQL for flood disaster coordination in Rubavu)\n2. Campus Intranet App (React Native mobile portal for university academic schedules)\n3. Oracle SQL Employee Management System (enterprise PL/SQL procedures & audit triggers)\n4. Online Driver Permit Booking System (PHP/MySQL appointment booking platform)\n5. Provisoire-Exam Platform (interactive driving license test simulator in PHP & JS)\n6. FilmNet (modern streaming discovery catalog in JS & PHP).',
     relevantLinks: [
       { label: 'Featured Projects Section', url: '#projects' },
       { label: 'Complete Projects Archive', url: '/projects' },
@@ -143,12 +143,12 @@ export const faqList: FAQItem[] = [
     ],
   },
   {
-    question: 'Tell me about the AUCA Intranet App.',
+    question: 'Tell me about the Campus Intranet Mobile App.',
     category: 'Verified Projects',
     keywords: ['auca app', 'auca intranet', 'intranet', 'campus app', 'student app', 'timetable', 'grades'],
-    answer: 'The AUCA Intranet App is a cross-platform mobile campus portal built with React Native, Node.js, Express.js, and MySQL. It centralizes student course schedules, lecture timetables, exam results, and administrative announcements with JWT authentication and offline caching.',
+    answer: 'The Campus Intranet App is a cross-platform mobile campus portal built with React Native, Node.js, Express.js, and MySQL. It centralizes student course schedules, lecture timetables, exam results, and administrative announcements with JWT authentication and offline caching.',
     relevantLinks: [
-      { label: 'AUCA Intranet GitHub Repo', url: 'https://github.com/Danieljospin1/Auca_intranet_app' },
+      { label: 'Campus Intranet GitHub Repo', url: 'https://github.com/Danieljospin1/Auca_intranet_app' },
       { label: 'View Case Study', url: '/projects/auca-intranet-app' },
     ],
   },
@@ -222,7 +222,7 @@ export const faqList: FAQItem[] = [
     question: 'What is Leopold’s professional experience level?',
     category: 'Experience & Journey',
     keywords: ['experience', 'years of experience', 'seniority', 'junior', 'intern', 'employment', 'career', 'student engineer'],
-    answer: 'Leopold is an emerging Software Engineer with 2+ years of hands-on academic, project-based, and collaborative engineering experience at AUCA. His work is characterized by designing real, functional software systems (distributed Java RMI, PL/SQL databases, and mobile apps). He does not claim decades of corporate employment, but brings deep dedication, solid computer science fundamentals, and clean coding discipline.',
+    answer: 'Leopold is an emerging Software Engineer with 2+ years of hands-on academic, project-based, and collaborative engineering experience. His work is characterized by designing real, functional software systems (distributed Java RMI, PL/SQL databases, and mobile apps). He does not claim decades of corporate employment, but brings deep dedication, solid computer science fundamentals, and clean coding discipline.',
     relevantLinks: [
       { label: 'Experience Timeline', url: '#experience' },
       { label: 'Download Curriculum Vitae', url: '/Leopold_MUGISHA_CV.pdf' },
@@ -300,7 +300,7 @@ export const suggestedQuestions = [
   'Where is he based & is he available to hire?',
   'What real projects has he built?',
   'Tell me about the Hazard Management System.',
-  'Explain his AUCA Intranet mobile app.',
+  'Explain his Campus Intranet mobile app.',
   'What database & backend technologies does he use?',
   'What is his educational background?',
   'How was this portfolio website built?',

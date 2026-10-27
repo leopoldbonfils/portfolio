@@ -15,14 +15,14 @@ export interface AssistantResponse {
   sources?: { label: string; url: string }[];
 }
 
-export const AI_SYSTEM_PROMPT = `You are the AI portfolio assistant representing Leopold Mugisha (Mugisha Leopold Bonfils), a Full-Stack Developer and Software Engineering student at Adventist University of Central Africa (AUCA) in Kigali, Rwanda.
+export const AI_SYSTEM_PROMPT = `You are the AI portfolio assistant representing Leopold Mugisha (Mugisha Leopold Bonfils), a Full-Stack Developer and Software Engineering student in Kigali, Rwanda.
 
 Your mission is to help recruiters, engineering managers, prospective collaborators, and portfolio visitors understand Leopold's actual verified technical skills, real software systems, academic background, and contact options.
 
 CRITICAL TRUTHFULNESS & GROUNDING RULES:
 1. Ground every answer strictly in the verified knowledge base below.
 2. NEVER invent corporate employers (e.g. Google, Amazon, Microsoft, Apple, Meta, Netflix, Stripe, OpenAI), client names, years of experience, certifications, degrees, project metrics, or claims.
-3. If asked about employment history: Leopold is an emerging software engineer (2023–2026) at AUCA with practical academic and collaborative project experience. Do not claim he has held formal senior corporate positions.
+3. If asked about employment history: Leopold is an emerging software engineer with practical academic and collaborative project experience (2023–2026). Do not claim he has held formal senior corporate positions.
 4. If asked where Leopold lives or is based: Explicitly state that he is based in Kigali, Rwanda (Gasabo District, Gatsata Sector, Nyamugari Cell).
 5. If asked about employment availability or hiring: He is actively open to software engineering internships, junior developer roles, and full-stack collaborations (on-site in Kigali, hybrid, or remote).
 6. If asked about salary, hourly rates, or compensation: State that compensation is not publicly published and direct the visitor to contact Leopold directly at leopordbonfils@gmail.com.
@@ -156,7 +156,7 @@ export function getDeterministicAnswer(
     )
   ) {
     return {
-      answer: `No, Leopold has not been employed at corporate tech giants (such as Google, Apple, Meta, Netflix, Amazon, Microsoft, Stripe, or OpenAI), nor has he worked as a corporate executive. His verified engineering background is as a dedicated Software Engineering student at AUCA in Kigali (2023–2026), where he has built practical distributed systems (Java RMI), enterprise databases (Oracle PL/SQL), and cross-platform mobile apps.`,
+      answer: `No, Leopold has not been employed at corporate tech giants (such as Google, Apple, Meta, Netflix, Amazon, Microsoft, Stripe, or OpenAI), nor has he worked as a corporate executive. His verified engineering background is as a dedicated Software Engineering student in Kigali (2023–2026), where he has built practical distributed systems (Java RMI), enterprise databases (Oracle PL/SQL), and cross-platform mobile apps.`,
       sources: [
         { label: 'View Real Experience', url: '#experience' },
         { label: 'Download Curriculum Vitae', url: profile.resumeUrl },
@@ -193,7 +193,7 @@ export function getDeterministicAnswer(
     query.includes('billion')
   ) {
     return {
-      answer: `No, those claims and metrics are unverified and fabricated. Leopold's software systems (such as the Hazard Management System in Rubavu and the AUCA Intranet App) were developed as university engineering capstone initiatives and open-source solutions. They are not commercialized venture-backed startups with $10M ARR or millions of commercial app store downloads. His verified outcomes are grounded in system reliability, clean 3NF database design, and working prototypes.`,
+      answer: `No, those claims and metrics are unverified and fabricated. Leopold's software systems (such as the Hazard Management System in Rubavu and the Campus Intranet App) were developed as university engineering capstone initiatives and open-source solutions. They are not commercialized venture-backed startups with $10M ARR or millions of commercial app store downloads. His verified outcomes are grounded in system reliability, clean 3NF database design, and working prototypes.`,
       sources: [
         { label: 'View Verified Projects', url: '#projects' },
         { label: 'GitHub Repositories', url: profile.github },
@@ -255,7 +255,7 @@ export function getDeterministicAnswer(
     query.includes('nft')
   ) {
     return {
-      answer: `No, Leopold has not built or published cryptocurrency trading bots, blockchain smart contracts, or forex arbitrage repositories. His 6 verified software engineering repositories are:\n\n1. **Hazard Management System:** Java RMI & MySQL distributed disaster coordination\n2. **AUCA Intranet App:** React Native & Node.js campus mobile portal\n3. **Oracle SQL Employee Management:** PL/SQL enterprise procedures and audit triggers\n4. **Online Driver Permit Booking:** PHP & MySQL reservation platform\n5. **Provisoire-Exam Platform:** PHP & JS driver's license self-assessment simulator\n6. **FilmNet:** JavaScript & PHP media showcase\n\nYou can inspect all his verified repositories on his official GitHub.`,
+      answer: `No, Leopold has not built or published cryptocurrency trading bots, blockchain smart contracts, or forex arbitrage repositories. His 6 verified software engineering repositories are:\n\n1. **Hazard Management System:** Java RMI & MySQL distributed disaster coordination\n2. **Campus Intranet App:** React Native & Node.js campus mobile portal\n3. **Oracle SQL Employee Management:** PL/SQL enterprise procedures and audit triggers\n4. **Online Driver Permit Booking:** PHP & MySQL reservation platform\n5. **Provisoire-Exam Platform:** PHP & JS driver's license self-assessment simulator\n6. **FilmNet:** JavaScript & PHP media showcase\n\nYou can inspect all his verified repositories on his official GitHub.`,
       sources: [
         { label: 'Verified GitHub Profile', url: profile.github },
         { label: 'Explore Verified Projects', url: '#projects' },
@@ -328,7 +328,7 @@ export function getDeterministicAnswer(
     // Case 5A: Missing or ambiguous context (user asks about "it", but no preceding project exists)
     if (!lastProject) {
       return {
-        answer: `You are asking a follow-up question, but our conversation history has not established a specific project yet. Which project would you like to know about?\n\nLeopold's six verified projects are:\n1. **Hazard Management System** (Distributed Java RMI & MySQL disaster coordination)\n2. **AUCA Intranet App** (Cross-platform React Native & Node.js REST API)\n3. **Oracle SQL Employee Management System** (PL/SQL Stored Procedures & Triggers)\n4. **Online Driver Permit Booking System** (PHP & MySQL appointment platform)\n5. **Provisoire-Exam Platform** (PHP & JavaScript self-assessment simulator)\n6. **FilmNet** (JavaScript & PHP media showcase)\n\nPlease specify which project you're inquiring about!`,
+        answer: `You are asking a follow-up question, but our conversation history has not established a specific project yet. Which project would you like to know about?\n\nLeopold's six verified projects are:\n1. **Hazard Management System** (Distributed Java RMI & MySQL disaster coordination)\n2. **Campus Intranet App** (Cross-platform React Native & Node.js REST API)\n3. **Oracle SQL Employee Management System** (PL/SQL Stored Procedures & Triggers)\n4. **Online Driver Permit Booking System** (PHP & MySQL appointment platform)\n5. **Provisoire-Exam Platform** (PHP & JavaScript self-assessment simulator)\n6. **FilmNet** (JavaScript & PHP media showcase)\n\nPlease specify which project you're inquiring about!`,
         sources: [
           { label: 'Explore Verified Projects', url: '#projects' },
           { label: 'Projects Archive', url: '/projects' },
@@ -460,7 +460,7 @@ export function getDeterministicAnswer(
     return {
       answer: `**${p.title}** (${p.category} • ${p.status})\n\n${p.fullDescription}\n\n• **Verified Role:** ${p.myRole}\n• **Problem Solved:** ${p.problemSolved}\n• **Architecture:** ${p.architecture}\n• **Key Features:** ${p.keyFeatures.slice(0, 3).join('; ')}\n• **Technologies:** ${p.technologies.join(', ')}\n• **Outcome:** ${p.verifiedOutcome}`,
       sources: [
-        { label: 'AUCA Intranet GitHub Repo', url: p.githubUrl },
+        { label: 'Campus Intranet GitHub Repo', url: p.githubUrl },
         { label: 'Read Case Study', url: `/projects/${p.slug}` },
       ],
     };
@@ -561,7 +561,7 @@ export function getDeterministicAnswer(
     query.includes('rwanda web store')
   ) {
     return {
-      answer: `FreshLink, TEGA Bus, Nile Movie, and Rwanda Software Web Store (DioliChat) are candidate and concept development ideas explored during coursework and prototyping.\n\nUnlike Leopold's six primary verified repositories (Hazard Management System, AUCA Intranet App, Oracle PL/SQL Employee Management, Driver Permit Booking, Provisoire-Exam, and FilmNet), they are not currently verified as completed, standalone public production deployments.`,
+      answer: `FreshLink, TEGA Bus, Nile Movie, and Rwanda Software Web Store (DioliChat) are candidate and concept development ideas explored during coursework and prototyping.\n\nUnlike Leopold's six primary verified repositories (Hazard Management System, Campus Intranet App, Oracle PL/SQL Employee Management, Driver Permit Booking, Provisoire-Exam, and FilmNet), they are not currently verified as completed, standalone public production deployments.`,
       sources: [
         { label: 'View Verified Works', url: '#projects' },
         { label: 'GitHub Repositories', url: profile.github },
@@ -578,9 +578,9 @@ export function getDeterministicAnswer(
   ) {
     const mobileProject = projects.find((p) => p.slug === 'auca-intranet-app')!;
     return {
-      answer: `Yes, Leopold contributed to the **AUCA Intranet App**, a cross-platform mobile application developed with **React Native** and a **Node.js/Express REST API**.\n\n• **Purpose:** Centralized campus portal giving AUCA students, lecturers, and staff secure access to announcements, lecture schedules, and exam results.\n• **Architecture:** React Native client with local offline caching communicating over HTTPS with an Express.js backend and MySQL database.`,
+      answer: `Yes, Leopold contributed to the **Campus Intranet App**, a cross-platform mobile application developed with **React Native** and a **Node.js/Express REST API**.\n\n• **Purpose:** Centralized campus portal giving university students, lecturers, and staff secure access to announcements, lecture schedules, and exam results.\n• **Architecture:** React Native client with local offline caching communicating over HTTPS with an Express.js backend and MySQL database.`,
       sources: [
-        { label: 'AUCA Intranet GitHub Repo', url: mobileProject.githubUrl },
+        { label: 'Campus Intranet GitHub Repo', url: mobileProject.githubUrl },
         { label: 'Mobile Case Study', url: `/projects/${mobileProject.slug}` },
       ],
     };
@@ -599,7 +599,7 @@ export function getDeterministicAnswer(
     query.includes('gatsata')
   ) {
     return {
-      answer: `Leopold Mugisha is based in **Kigali, Rwanda** (Gasabo District, Gatsata Sector, Nyamugari Cell).\n\nHe is currently studying Software Engineering at the Adventist University of Central Africa (AUCA) in Kigali and is actively **open to software engineering internships, junior developer roles, and full-stack collaborations** (on-site in Kigali, hybrid, or remote worldwide).`,
+      answer: `Leopold Mugisha is based in **Kigali, Rwanda** (Gasabo District, Gatsata Sector, Nyamugari Cell).\n\nHe is currently studying Software Engineering in Kigali and is actively **open to software engineering internships, junior developer roles, and full-stack collaborations** (on-site in Kigali, hybrid, or remote worldwide).`,
       sources: [
         { label: 'Contact Section', url: '#contact' },
         { label: 'Email Leopold', url: `mailto:${profile.email}` },
@@ -621,7 +621,7 @@ export function getDeterministicAnswer(
     query.includes('bite')
   ) {
     return {
-      answer: `Hello! I am Leopold Mugisha's AI representative. How can I assist you today? You can ask me:\n\n• Who Leopold is and where he is located\n• The 6 verified projects he has built (Java RMI, Oracle PL/SQL, React Native, PHP)\n• His core technical skills in backend, databases, and mobile\n• His software engineering studies at AUCA in Kigali\n• How to download his résumé or get in touch for hiring`,
+      answer: `Hello! I am Leopold Mugisha's AI representative. How can I assist you today? You can ask me:\n\n• Who Leopold is and where he is located\n• The 6 verified projects he has built (Java RMI, Oracle PL/SQL, React Native, PHP)\n• His core technical skills in backend, databases, and mobile\n• His software engineering studies and projects in Kigali\n• How to download his résumé or get in touch for hiring`,
       sources: [
         { label: 'View Projects', url: '#projects' },
         { label: 'Technical Skills', url: '#skills' },
@@ -642,7 +642,7 @@ export function getDeterministicAnswer(
     query.includes('full name')
   ) {
     return {
-      answer: `**Leopold Mugisha** (full name: *Mugisha Leopold Bonfils*) is a Full-Stack Developer and Software Engineering student at the **Adventist University of Central Africa (AUCA)** in Kigali, Rwanda.\n\nHe specializes in building reliable, practical software systems:\n• **Distributed Systems:** Java & Java RMI client-server applications\n• **Enterprise Databases:** Oracle PL/SQL stored procedures, packages, audit triggers, and MySQL\n• **Mobile Development:** Cross-platform React Native apps\n• **Modern Web Engineering:** Next.js 14, React, PHP, Tailwind CSS\n\nHe is known for clean code, 3NF schema normalization, and designing tools that solve community and administrative problems in Rwanda.`,
+      answer: `**Leopold Mugisha** (full name: *Mugisha Leopold Bonfils*) is a Full-Stack Developer and Software Engineering student in Kigali, Rwanda.\n\nHe specializes in building reliable, practical software systems:\n• **Distributed Systems:** Java & Java RMI client-server applications\n• **Enterprise Databases:** Oracle PL/SQL stored procedures, packages, audit triggers, and MySQL\n• **Mobile Development:** Cross-platform React Native apps\n• **Modern Web Engineering:** Next.js 14, React, PHP, Tailwind CSS\n\nHe is known for clean code, 3NF schema normalization, and designing tools that solve community and administrative problems in Rwanda.`,
       sources: [
         { label: 'Explore About Section', url: '#about' },
         { label: 'GitHub Profile', url: profile.github },
@@ -683,7 +683,7 @@ export function getDeterministicAnswer(
     query.includes('work experience')
   ) {
     return {
-      answer: `Leopold is an emerging Software Engineer with 2+ years of hands-on academic, project-based, and collaborative engineering experience at AUCA.\n\nHis work is characterized by designing functional software systems (distributed Java RMI, PL/SQL databases, and mobile apps). He does not claim decades of corporate employment, but brings deep dedication, solid computer science fundamentals, and clean coding discipline.`,
+      answer: `Leopold is an emerging Software Engineer with 2+ years of hands-on academic, project-based, and collaborative engineering experience.\n\nHis work is characterized by designing functional software systems (distributed Java RMI, PL/SQL databases, and mobile apps). He does not claim decades of corporate employment, but brings deep dedication, solid computer science fundamentals, and clean coding discipline.`,
       sources: [
         { label: 'Experience Timeline', url: '#experience' },
         { label: 'Download Curriculum Vitae', url: profile.resumeUrl },
@@ -743,7 +743,7 @@ export function getDeterministicAnswer(
     query.includes('systems')
   ) {
     return {
-      answer: `Leopold has built six verified open-source and collaborative software projects:\n\n1. **Hazard Management System:** Distributed Java RMI server & MySQL database for flood disaster coordination in Rubavu District, Western Rwanda.\n2. **AUCA Intranet App:** Cross-platform React Native & Node.js mobile portal for AUCA university schedules, announcements, and results.\n3. **Oracle SQL Employee Management System:** Enterprise PL/SQL packages, stored procedures, and audit triggers for payroll and departmental records.\n4. **Online Driver Permit Booking System:** Web application in PHP & MySQL for scheduling driving test appointments.\n5. **Provisoire-Exam Platform:** Interactive practice simulator for Rwanda's provisional driver's license exam in PHP & JS.\n6. **FilmNet:** Modern cinematic media catalog in JavaScript & PHP.`,
+      answer: `Leopold has built six verified open-source and collaborative software projects:\n\n1. **Hazard Management System:** Distributed Java RMI server & MySQL database for flood disaster coordination in Rubavu District, Western Rwanda.\n2. **Campus Intranet App:** Cross-platform React Native & Node.js mobile portal for university schedules, announcements, and results.\n3. **Oracle SQL Employee Management System:** Enterprise PL/SQL packages, stored procedures, and audit triggers for payroll and departmental records.\n4. **Online Driver Permit Booking System:** Web application in PHP & MySQL for scheduling driving test appointments.\n5. **Provisoire-Exam Platform:** Interactive practice simulator for Rwanda's provisional driver's license exam in PHP & JS.\n6. **FilmNet:** Modern cinematic media catalog in JavaScript & PHP.`,
       sources: [
         { label: 'Explore Projects Section', url: '#projects' },
         { label: 'Complete Projects Archive', url: '/projects' },
@@ -793,7 +793,7 @@ export function getDeterministicAnswer(
 
   // 20. Truthful Missing-Information Fallback
   return {
-    answer: `I do not have verified information in Leopold Mugisha's portfolio knowledge base regarding "${userQuery}".\n\nAs his AI portfolio assistant, I can provide factual information regarding:\n• **Location:** Kigali, Rwanda (Gasabo District)\n• **Verified Projects:** Hazard Management System (Java RMI), AUCA Intranet App (React Native), Oracle SQL Employee Management, Driver Permit Booking (PHP)\n• **Skills:** Java, Oracle PL/SQL, MySQL, React, React Native, Node.js, Next.js\n• **Education:** B.Sc. in Software Engineering at AUCA (2023–2026)\n• **Contact & Hiring:** Open to internships and junior full-stack roles\n\nPlease let me know if you would like to explore any of these verified areas!`,
+    answer: `I do not have verified information in Leopold Mugisha's portfolio knowledge base regarding "${userQuery}".\n\nAs his AI portfolio assistant, I can provide factual information regarding:\n• **Location:** Kigali, Rwanda (Gasabo District)\n• **Verified Projects:** Hazard Management System (Java RMI), Campus Intranet App (React Native), Oracle SQL Employee Management, Driver Permit Booking (PHP)\n• **Skills:** Java, Oracle PL/SQL, MySQL, React, React Native, Node.js, Next.js\n• **Education:** B.Sc. in Software Engineering at AUCA (2023–2026)\n• **Contact & Hiring:** Open to internships and junior full-stack roles\n\nPlease let me know if you would like to explore any of these verified areas!`,
     sources: [
       { label: 'Explore Verified Projects', url: '#projects' },
       { label: 'Technical Skills', url: '#skills' },

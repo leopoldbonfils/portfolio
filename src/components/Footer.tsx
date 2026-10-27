@@ -22,7 +22,7 @@ export default function Footer() {
               {profile.name}
             </span>
             <span className="text-xs font-mono text-[#787163]">
-              Full-Stack Developer • Software Engineering Student (AUCA)
+              Full-Stack Developer • Software Engineering Student
             </span>
           </div>
 

@@ -8,13 +8,13 @@ import { profile } from '@/data/profile';
 
 export const metadata: Metadata = {
   title: `${profile.name} — ${profile.role}`,
-  description: `${profile.role} & Software Engineering student at AUCA in Kigali, Rwanda. Practical web applications, distributed Java systems, Oracle PL/SQL, React Native, and clean code.`,
+  description: `${profile.role} & Software Engineering student in Kigali, Rwanda. Practical web applications, distributed Java systems, Oracle PL/SQL, React Native, and clean code.`,
   keywords: [
     'Leopold Mugisha',
     'Mugisha Leopold Bonfils',
     'Full-Stack Developer',
     'Software Engineer Rwanda',
-    'AUCA Software Engineering',
+    'Software Engineering Kigali',
     'Java RMI',
     'Oracle PL/SQL',
     'React Native Developer',

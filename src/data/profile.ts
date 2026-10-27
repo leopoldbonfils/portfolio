@@ -1,4 +1,4 @@
-﻿export interface ProfileData {
+export interface ProfileData {
   name: string;
   fullName: string;
   role: string;
@@ -23,9 +23,9 @@ export const profile: ProfileData = {
   fullName: 'Mugisha Leopold Bonfils',
   role: 'Full-Stack Developer',
   headline: 'Building thoughtful digital products, from intuitive interfaces to reliable backend systems.',
-  shortBio: 'Software engineering student at the Adventist University of Central Africa (AUCA) focused on clean architecture, relational databases, backend APIs, and modern responsive web applications.',
+  shortBio: 'Software engineering student focused on clean architecture, relational databases, backend APIs, and modern responsive web applications.',
   fullBio: [
-    'I am currently pursuing a Bachelor of Science in Software Engineering at the Adventist University of Central Africa (AUCA) in Kigali, Rwanda.',
+    'I am currently pursuing a Bachelor of Science in Software Engineering in Kigali, Rwanda.',
     'My core focus centers on building practical, reliable applications—spanning distributed Java RMI systems for disaster hazard management, complex Oracle PL/SQL database systems, RESTful Node.js APIs, and modern React & React Native client interfaces.',
     'I believe in decomposing complex problems into clean, testable components, designing normalized and resilient data models, and delivering tools that directly solve real-world community and institutional challenges.'
   ],

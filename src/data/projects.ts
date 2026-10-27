@@ -1,4 +1,4 @@
-﻿export interface Project {
+export interface Project {
   slug: string;
   title: string;
   category: 'Full-Stack' | 'Backend & Database' | 'Mobile' | 'Web';
@@ -42,11 +42,11 @@ export const projects: Project[] = [
   },
   {
     slug: 'auca-intranet-app',
-    title: 'AUCA Intranet App',
+    title: 'Campus Intranet Mobile App',
     category: 'Mobile',
     featured: true,
-    shortDescription: 'Centralized mobile campus portal for AUCA academic, administrative, and student communication services.',
-    fullDescription: 'Cross-platform mobile application providing Adventist University of Central Africa students, lecturers, and administration secure access to campus announcements, course timetables, exam results, and academic resources.',
+    shortDescription: 'Centralized mobile campus portal for academic, administrative, and student communication services.',
+    fullDescription: 'Cross-platform mobile application providing students, lecturers, and university administration secure access to campus announcements, course timetables, exam results, and academic resources.',
     technologies: ['React Native', 'Node.js', 'Express.js', 'MySQL', 'REST API', 'JWT Auth'],
     myRole: 'Full-Stack Contributor: Built RESTful API endpoints for timetable and announcement delivery, integrated student authentication, and structured mobile state management.',
     problemSolved: 'Students previously had to consult fragmented physical noticeboards and disjointed portals to access academic announcements, schedules, and grade releases.',

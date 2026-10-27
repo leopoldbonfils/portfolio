@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React from 'react';
 import Image from 'next/image';
@@ -37,9 +37,7 @@ export default function Hero() {
 
             {/* Short verified description */}
             <p className="text-sm sm:text-base text-[#8f887b] leading-relaxed max-w-xl">
-              Software engineering student at the{' '}
-              <span className="text-[#ded8cd] font-medium">Adventist University of Central Africa (AUCA)</span>{' '}
-              in Kigali. Passionate about distributed systems, relational database architecture, and building tools that address real-world challenges.
+              Software engineering student passionate about distributed systems, relational database architecture, and building thoughtful digital products that address real-world challenges.
             </p>
 
             {/* CTAs */}
@@ -133,9 +131,9 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Location footer pill */}
+              {/* Dossier footer */}
               <div className="mt-5 pt-4 border-t border-[#211e18] flex items-center justify-between text-xs text-[#9a9386]">
-                <span>Adventist Univ. of Central Africa</span>
+                <span className="font-medium text-[#ded8cd]">{profile.name}</span>
                 <span className="font-mono text-accent">2023 — 2026</span>
               </div>
             </div>

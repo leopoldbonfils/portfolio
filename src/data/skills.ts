@@ -1,4 +1,4 @@
-﻿export interface SkillCategory {
+export interface SkillCategory {
   title: string;
   description: string;
   skills: {
@@ -34,7 +34,7 @@ export const skillCategories: SkillCategory[] = [
     title: 'Backend, Distributed Systems & APIs',
     description: 'Server architectures, distributed computing, and RESTful service layers.',
     skills: [
-      { name: 'Node.js & Express.js', level: 'Proficient', verifiedContext: 'Built REST API endpoints for AUCA Intranet student portal' },
+      { name: 'Node.js & Express.js', level: 'Proficient', verifiedContext: 'Built REST API endpoints for Campus Intranet student portal' },
       { name: 'Java RMI (Remote Method Invocation)', level: 'Proficient', verifiedContext: 'Implemented distributed client-server event coordination' },
       { name: 'RESTful API Design', level: 'Proficient', verifiedContext: 'JSON schemas, status codes, query pagination, secure authentication' },
       { name: 'Authentication & Security', level: 'Intermediate', verifiedContext: 'JWT token lifecycles, password hashing, SQL injection prevention' }
@@ -45,7 +45,7 @@ export const skillCategories: SkillCategory[] = [
     description: 'Relational data modeling, ACID transactions, and procedure authoring.',
     skills: [
       { name: 'Oracle Database', level: 'Proficient', verifiedContext: 'Enterprise schema architecture, PL/SQL packages, audit triggers' },
-      { name: 'MySQL', level: 'Advanced', verifiedContext: 'Primary relational store for AUCA Intranet, Permit Booking, and Java JDBC' },
+      { name: 'MySQL', level: 'Advanced', verifiedContext: 'Primary relational store for Campus Intranet, Permit Booking, and Java JDBC' },
       { name: 'JDBC & Connection Pooling', level: 'Proficient', verifiedContext: 'Java database connectivity, transactional commit/rollback handlers' },
       { name: 'Schema Normalization (3NF)', level: 'Advanced', verifiedContext: 'Relational modeling, primary/foreign key constraints, indexing' }
     ]
@@ -54,7 +54,7 @@ export const skillCategories: SkillCategory[] = [
     title: 'Mobile & Tooling',
     description: 'Cross-platform app development and developer workflows.',
     skills: [
-      { name: 'React Native', level: 'Intermediate', verifiedContext: 'Mobile interface development for the AUCA Intranet mobile app' },
+      { name: 'React Native', level: 'Intermediate', verifiedContext: 'Mobile interface development for the Campus Intranet mobile app' },
       { name: 'Git & GitHub', level: 'Proficient', verifiedContext: 'Version control, branch management, code collaboration, pull requests' },
       { name: 'Clean Architecture Principles', level: 'Proficient', verifiedContext: 'Modular design, separation of concerns, testable clean code' }
     ]
