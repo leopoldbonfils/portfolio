@@ -40,11 +40,9 @@ export async function POST(req: NextRequest) {
     // 1. Google Gemini Provider
     if (geminiKey) {
       const candidateModels = [
-        'gemini-3.8-flash',
+        'gemini-3.5-flash-lite',
         'gemini-3.5-flash',
         'gemini-flash-latest',
-        'gemini-3.1-flash-lite',
-        'gemini-2.5-flash-lite',
       ];
 
       for (const model of candidateModels) {
@@ -73,7 +71,7 @@ export async function POST(req: NextRequest) {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ contents }),
-              signal: AbortSignal.timeout(5000),
+              signal: AbortSignal.timeout(3500),
             }
           );
 

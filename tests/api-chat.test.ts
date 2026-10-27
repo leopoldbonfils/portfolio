@@ -153,7 +153,7 @@ async function runApiTests() {
       const passed =
         res.status === 200 &&
         data.content === mockGeminiReply &&
-        data.provider === 'gemini-3.8-flash';
+        data.provider === 'gemini-3.5-flash-lite';
 
       apiResults.push({
         name: 'Mocked Gemini Provider: Returns LLM candidate response',

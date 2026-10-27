@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, MessageSquare, X, Send, RotateCcw, Sparkles, ExternalLink, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { X, Send, RotateCcw, ExternalLink } from 'lucide-react';
 import { suggestedQuestions } from '@/data/faq';
-import { profile } from '@/data/profile';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -18,7 +18,7 @@ export default function AIChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: `Hello! I am Leopold Mugisha's AI portfolio assistant. Ask me about his verified full-stack projects, database architectures, education at AUCA, or contact details.`,
+      content: `Hello! I am Bobo Assistance, Leopold Mugisha's AI portfolio assistant. Ask me about his verified full-stack projects, database architectures, education at AUCA, or contact details.`,
     },
   ]);
 
@@ -111,7 +111,7 @@ export default function AIChatWidget() {
     setMessages([
       {
         role: 'assistant',
-        content: `Hello! I am Leopold Mugisha's AI portfolio assistant. Ask me about his verified full-stack projects, database architectures, education at AUCA, or contact details.`,
+        content: `Hello! I am Bobo Assistance, Leopold Mugisha's AI portfolio assistant. Ask me about his verified full-stack projects, database architectures, education at AUCA, or contact details.`,
       },
     ]);
   }
@@ -125,14 +125,20 @@ export default function AIChatWidget() {
           onClick={() => setIsOpen(!isOpen)}
           className="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#181510] hover:bg-[#221e17] text-[#ded8cd] hover:text-white border border-[#302a20] hover:border-accent shadow-2xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-accent"
           aria-expanded={isOpen}
-          aria-label="Open Leopold's AI Portfolio Assistant"
+          aria-label="Open Bobo Assistance"
         >
-          <div className="relative">
+          <div className="relative w-6 h-6 flex items-center justify-center">
             <span className="w-2.5 h-2.5 rounded-full bg-accent absolute -top-0.5 -right-0.5 animate-ping opacity-75" />
-            <Bot className="w-5 h-5 text-accent" />
+            <Image
+              src="/bobo-assistant-logo.png"
+              alt="Bobo Assistance Logo"
+              width={24}
+              height={24}
+              className="w-5 h-5 object-contain rounded-full group-hover:scale-110 transition-transform duration-300"
+            />
           </div>
           <span className="text-xs font-mono font-medium tracking-tight">
-            Ask AI Assistant
+            Bobo Assistance
           </span>
         </button>
       </div>
@@ -148,15 +154,22 @@ export default function AIChatWidget() {
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3.5 border-b border-[#211e18] bg-[#14120e]">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-[#1e1a14] border border-[#332c21] flex items-center justify-center text-accent">
-                <Sparkles className="w-4 h-4" />
+              <div className="w-9 h-9 rounded-full bg-white/5 border border-[#332c21] flex items-center justify-center overflow-hidden p-1 shadow-inner">
+                <Image
+                  src="/bobo-assistant-logo.png"
+                  alt="Bobo Assistance"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="flex flex-col">
-                <span id="ai-chat-title" className="text-xs font-bold text-[#f2ede4]">
-                  Leopold's AI Representative
+                <span id="ai-chat-title" className="text-xs font-bold text-[#f2ede4] flex items-center gap-1.5">
+                  Bobo Assistance
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" title="Online" />
                 </span>
                 <span className="text-[10px] font-mono text-[#8a8376]">
-                  Grounded strictly in verified portfolio data
+                  Leopold's Verified Portfolio Assistant
                 </span>
               </div>
             </div>
@@ -176,7 +189,7 @@ export default function AIChatWidget() {
                 type="button"
                 onClick={() => setIsOpen(false)}
                 className="p-1.5 rounded-md text-[#857e72] hover:text-[#ded8cd] hover:bg-[#1f1b15] transition-colors"
-                aria-label="Close Assistant"
+                aria-label="Close Bobo Assistance"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -194,6 +207,21 @@ export default function AIChatWidget() {
                     isAssistant ? 'items-start mr-4' : 'items-end ml-4'
                   }`}
                 >
+                  {isAssistant && (
+                    <div className="flex items-center gap-1.5 mb-1 pl-0.5">
+                      <div className="w-4 h-4 rounded-full overflow-hidden bg-white/5 border border-[#332c21] flex items-center justify-center p-0.5">
+                        <Image
+                          src="/bobo-assistant-logo.png"
+                          alt="Bobo"
+                          width={14}
+                          height={14}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <span className="text-[10px] font-mono text-[#8a8376]">Bobo Assistance</span>
+                    </div>
+                  )}
+
                   <div
                     className={`p-3 rounded-xl max-w-full leading-relaxed whitespace-pre-wrap ${
                       isAssistant
@@ -227,11 +255,22 @@ export default function AIChatWidget() {
 
             {/* Typing Indicator */}
             {loading && (
-              <div className="self-start flex items-center gap-1.5 p-3 rounded-xl bg-[#161410] border border-[#26221a] text-[#8a8376]">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse delay-150" />
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse delay-300" />
-                <span className="font-mono text-[11px] ml-1">Analyzing knowledge base...</span>
+              <div className="self-start flex items-center gap-2 p-3 rounded-xl bg-[#161410] border border-[#26221a] text-[#8a8376]">
+                <div className="w-4 h-4 rounded-full overflow-hidden bg-white/5 border border-[#332c21] flex items-center justify-center p-0.5">
+                  <Image
+                    src="/bobo-assistant-logo.png"
+                    alt="Bobo"
+                    width={14}
+                    height={14}
+                    className="w-full h-full object-contain animate-spin"
+                  />
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse delay-150" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse delay-300" />
+                </div>
+                <span className="font-mono text-[11px] ml-1">Bobo Assistance is answering...</span>
               </div>
             )}
 
@@ -268,7 +307,7 @@ export default function AIChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask about projects, skills, AUCA, contact..."
+                placeholder="Ask Bobo Assistance about projects, skills, AUCA, contact..."
                 className="w-full pl-3 pr-10 py-2 rounded-lg bg-[#181611] border border-[#2d2820] text-xs text-[#f2ede4] placeholder-[#6b6456] focus:border-accent focus:outline-none resize-none"
               />
               <button
@@ -283,7 +322,7 @@ export default function AIChatWidget() {
             </div>
             <div className="flex items-center justify-between text-[10px] font-mono text-[#666054] mt-1.5 px-0.5">
               <span>Press Enter to send</span>
-              <span>Never invents facts</span>
+              <span>Bobo Assistance • Never invents facts</span>
             </div>
           </div>
         </div>
