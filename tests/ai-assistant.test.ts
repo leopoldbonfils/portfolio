@@ -69,7 +69,9 @@ function runAssertion(test: TestCase) {
       answerLower.includes('which project') ||
       answerLower.includes('not hold') ||
       answerLower.includes('not been employed') ||
-      answerLower.includes('not built');
+      answerLower.includes('not built') ||
+      answerLower.includes("don't have confirmed employment") ||
+      answerLower.includes('does not provide flat price');
     if (!expressesMissing) {
       failures.push('Expected truthful missing-information or boundary response, but none detected');
     }
@@ -663,7 +665,268 @@ runAssertion({
 });
 
 // -----------------------------------------------------------------------------
-// 16. Suggested Questions Matrix (All 8 Checked Individually)
+// 16. Level 2: Evidence-Based Professional Interpretation
+// -----------------------------------------------------------------------------
+runAssertion({
+  category: 'Professional Reasoning (Level 2)',
+  query: 'What value could you bring to our company?',
+  expectedKeywords: ['documented projects', 'full-stack', 'backend', 'REST APIs', 'relational databases'],
+  forbiddenKeywords: ['do not have verified information', 'refuse'],
+  minSources: 2,
+  expectedSourceUrls: ['#projects', '#skills'],
+});
+
+runAssertion({
+  category: 'Professional Reasoning (Level 2)',
+  query: 'Why should we hire you?',
+  expectedKeywords: ['junior software engineering', 'Hazard Management System', 'Oracle PL/SQL', 'React Native'],
+  minSources: 2,
+  expectedSourceUrls: ['#projects'],
+});
+
+runAssertion({
+  category: 'Professional Reasoning (Level 2)',
+  query: 'What makes you a good candidate for a junior developer role?',
+  expectedKeywords: ['junior', '3NF', 'REST APIs', 'Git'],
+  minSources: 2,
+  expectedSourceUrls: ['#skills'],
+});
+
+runAssertion({
+  category: 'Professional Reasoning (Level 2)',
+  query: 'Which of your projects best demonstrates your backend skills?',
+  expectedKeywords: ['Hazard Management System', 'Java RMI', 'Oracle SQL Employee Management System', 'PL/SQL'],
+  minSources: 2,
+  expectedSourceUrls: ['/projects/hazard-management-system'],
+});
+
+runAssertion({
+  category: 'Professional Reasoning (Level 2)',
+  query: 'Which project should we review first?',
+  expectedKeywords: ['Hazard Management System', 'Campus Intranet Mobile App'],
+  minSources: 2,
+  expectedSourceUrls: ['#projects'],
+});
+
+runAssertion({
+  category: 'Professional Reasoning (Level 2)',
+  query: 'What kind of problems can you solve?',
+  expectedKeywords: ['emergency', 'Rubavu', 'audit', 'booking'],
+  minSources: 2,
+  expectedSourceUrls: ['#projects'],
+});
+
+runAssertion({
+  category: 'Professional Reasoning (Level 2)',
+  query: 'What are your strongest technical areas?',
+  expectedKeywords: ['relational database', '3NF', 'backend services', 'Java RMI'],
+  minSources: 2,
+  expectedSourceUrls: ['#skills'],
+});
+
+runAssertion({
+  category: 'Professional Reasoning (Level 2)',
+  query: 'How could your experience help our development team?',
+  expectedKeywords: ['documented projects', 'full-stack', 'backend services'],
+  minSources: 2,
+  expectedSourceUrls: ['#projects'],
+});
+
+// -----------------------------------------------------------------------------
+// 17. Level 3: General Software Engineering Concepts
+// -----------------------------------------------------------------------------
+runAssertion({
+  category: 'General Technical Explanations (Level 3)',
+  query: 'What is database normalization?',
+  expectedKeywords: ['Database Normalization', '1NF', '2NF', '3NF', 'anomalies', 'Oracle SQL'],
+  minSources: 1,
+  expectedSourceUrls: ['#skills'],
+});
+
+runAssertion({
+  category: 'General Technical Explanations (Level 3)',
+  query: 'How does JWT authentication work?',
+  expectedKeywords: ['JSON Web Token', 'Header', 'Payload', 'Signature', 'Campus Intranet Mobile App'],
+  minSources: 1,
+  expectedSourceUrls: ['/projects/auca-intranet-app'],
+});
+
+runAssertion({
+  category: 'General Technical Explanations (Level 3)',
+  query: 'What is the difference between frontend and backend development?',
+  expectedKeywords: ['Frontend Development', 'Backend Development', 'client-side', 'server-side', 'full-stack'],
+  minSources: 2,
+  expectedSourceUrls: ['#skills', '#projects'],
+});
+
+runAssertion({
+  category: 'General Technical Explanations (Level 3)',
+  query: 'How would you design a REST API?',
+  expectedKeywords: ['Resource-Oriented', 'HTTP Methods', 'Statelessness', 'Status Codes', 'Campus Intranet'],
+  minSources: 1,
+  expectedSourceUrls: ['/projects/auca-intranet-app'],
+});
+
+runAssertion({
+  category: 'General Technical Explanations (Level 3)',
+  query: 'How can a relational database maintain data integrity?',
+  expectedKeywords: ['Entity Integrity', 'Referential Integrity', 'Domain Integrity', 'ACID', 'Oracle SQL'],
+  minSources: 1,
+  expectedSourceUrls: ['#skills'],
+});
+
+runAssertion({
+  category: 'General Technical Explanations (Level 3)',
+  query: 'What is Java RMI?',
+  expectedKeywords: ['Remote Method Invocation', 'JVM', 'stubs', 'skeletons', 'Hazard Management System'],
+  minSources: 2,
+  expectedSourceUrls: ['/projects/hazard-management-system'],
+});
+
+// -----------------------------------------------------------------------------
+// 18. Project Comparisons
+// -----------------------------------------------------------------------------
+runAssertion({
+  category: 'Project Comparisons',
+  query: 'Compare the Hazard Management System and AUCA Intranet App',
+  expectedKeywords: ['Hazard Management System', 'Campus Intranet Mobile App', 'Java RMI', 'React Native'],
+  minSources: 2,
+  expectedSourceUrls: ['/projects/hazard-management-system', '/projects/auca-intranet-app'],
+});
+
+runAssertion({
+  category: 'Project Comparisons',
+  query: 'Compare the Hazard Management System and Oracle SQL project',
+  expectedKeywords: ['Hazard Management System', 'Oracle SQL Employee Management System', 'PL/SQL', 'Java RMI'],
+  minSources: 2,
+  expectedSourceUrls: ['/projects/hazard-management-system', '/projects/employee-management-system'],
+});
+
+runAssertion({
+  category: 'Project Comparisons',
+  query: 'Compare the Driver Permit Booking System and Provisoire-Exam',
+  expectedKeywords: ['Online Driver Permit Booking System', 'Provisoire-Exam Platform', 'scheduling', 'simulator'],
+  minSources: 2,
+  expectedSourceUrls: ['/projects/online-driver-permit-booking', '/projects/provisoire-exam'],
+});
+
+// -----------------------------------------------------------------------------
+// 19. Live Demos & Download Requests
+// -----------------------------------------------------------------------------
+runAssertion({
+  category: 'Live Demo & Download Inquiries',
+  query: 'Can I see a live demo of the Hazard Management System?',
+  expectedKeywords: ['GitHub', 'Hazard Management System', 'unconfirmed'],
+  minSources: 2,
+  expectedSourceUrls: ['https://github.com/leopoldbonfils/HazardManagementSystemRMIServer'],
+});
+
+runAssertion({
+  category: 'Live Demo & Download Inquiries',
+  query: 'Where can I download the Campus Intranet mobile app?',
+  expectedKeywords: ['GitHub', 'Campus Intranet Mobile App', 'unconfirmed'],
+  minSources: 2,
+  expectedSourceUrls: ['https://github.com/Danieljospin1/Auca_intranet_app'],
+});
+
+// -----------------------------------------------------------------------------
+// 20. Specific Profile, Education & Skills Queries (Section 11 Minimal Inquiries)
+// -----------------------------------------------------------------------------
+runAssertion({
+  category: 'Personal Profile Queries',
+  query: 'Who are you?',
+  expectedKeywords: ['Leopold Mugisha', 'Mugisha Leopold Bonfils', 'Full-Stack Developer'],
+  minSources: 2,
+  expectedSourceUrls: ['#about', profile.github],
+});
+
+runAssertion({
+  category: 'Personal Profile Queries',
+  query: 'Tell me about Leopold Bonfils.',
+  expectedKeywords: ['Mugisha Leopold Bonfils', 'Software Engineering'],
+  minSources: 2,
+  expectedSourceUrls: ['#about'],
+});
+
+runAssertion({
+  category: 'Personal Profile Queries',
+  query: 'What do you do?',
+  expectedKeywords: ['Full-Stack Developer', 'Distributed Systems', 'Enterprise Databases'],
+  minSources: 2,
+  expectedSourceUrls: ['#about'],
+});
+
+runAssertion({
+  category: 'Education Queries',
+  query: 'Where do you study?',
+  expectedKeywords: ['Adventist University of Central Africa', 'AUCA', 'Kigali, Rwanda'],
+  minSources: 1,
+  expectedSourceUrls: ['#education'],
+});
+
+runAssertion({
+  category: 'Education Queries',
+  query: 'What did you study at AUCA?',
+  expectedKeywords: ['AUCA', 'Distributed Systems', 'Database Management', 'Object-Oriented'],
+  minSources: 1,
+  expectedSourceUrls: ['#education'],
+});
+
+runAssertion({
+  category: 'Education Queries',
+  query: 'When are you expected to graduate?',
+  expectedKeywords: ['2026', 'expected graduation', 'in progress', 'AUCA'],
+  minSources: 1,
+  expectedSourceUrls: ['#education'],
+});
+
+runAssertion({
+  category: 'Skills Queries',
+  query: 'What programming languages do you know?',
+  expectedKeywords: ['Java', 'TypeScript', 'JavaScript', 'SQL', 'PHP', 'Python'],
+  minSources: 1,
+  expectedSourceUrls: ['#skills'],
+});
+
+runAssertion({
+  category: 'Skills Queries',
+  query: 'Which databases have you used?',
+  expectedKeywords: ['Oracle Database', 'MySQL', 'PL/SQL', '3NF'],
+  minSources: 1,
+  expectedSourceUrls: ['#skills'],
+});
+
+runAssertion({
+  category: 'Skills Queries',
+  query: 'Do you build REST APIs?',
+  expectedKeywords: ['RESTful API', 'Node.js', 'Express.js', 'JWT Auth'],
+  minSources: 1,
+  expectedSourceUrls: ['#skills'],
+});
+
+// -----------------------------------------------------------------------------
+// 21. Nuanced Work Experience & Cost Estimation
+// -----------------------------------------------------------------------------
+runAssertion({
+  category: 'Nuanced Work Experience',
+  query: 'Do you have professional work experience?',
+  expectedKeywords: ['documents several software development projects', "don't have confirmed employment"],
+  expectMissingInfo: true,
+  minSources: 2,
+  expectedSourceUrls: ['#projects', '#experience'],
+});
+
+runAssertion({
+  category: 'Project Pricing & Scoping',
+  query: 'How much would it cost to build our application?',
+  expectedKeywords: ['requirements', 'scope', 'timeline', 'does not provide flat price'],
+  expectMissingInfo: true,
+  minSources: 1,
+  expectedSourceUrls: ['#contact'],
+});
+
+// -----------------------------------------------------------------------------
+// 22. Suggested Questions Matrix (All 8 Checked Individually)
 // -----------------------------------------------------------------------------
 console.log('Testing each of the 8 suggested questions individually:\n');
 

@@ -10,7 +10,9 @@ export interface FAQItem {
     | 'Experience & Journey'
     | 'Employment & Collaboration'
     | 'Contact & Profiles'
-    | 'Portfolio Website Implementation';
+    | 'Portfolio Website Implementation'
+    | 'Professional Reasoning'
+    | 'Software Engineering Concepts';
   answer: string;
   keywords: string[];
   relevantLinks?: { label: string; url: string }[];
@@ -291,6 +293,141 @@ export const faqList: FAQItem[] = [
     answer: 'The website is continuously deployed on Netlify using @netlify/plugin-nextjs and netlify.toml, synced directly to Leopold’s GitHub repository (leopoldbonfils/portfolio).',
     relevantLinks: [
       { label: 'GitHub Repository', url: 'https://github.com/leopoldbonfils/portfolio' },
+    ],
+  },
+
+  // 11. Professional Reasoning & Candidate Evaluation (Level 2)
+  {
+    question: 'What value could Leopold bring to our company or team?',
+    category: 'Professional Reasoning',
+    keywords: ['value', 'bring', 'company', 'team', 'contribute', 'contribution', 'help our team'],
+    answer: 'Based on his documented projects and technical skills, Leopold can contribute to building full-stack applications, developing backend services and REST APIs, and working with relational databases. His project experience includes Java and RMI, React Native, Node.js, PHP, MySQL, and Oracle PL/SQL. These projects demonstrate practical exposure to application development, database design, and connecting software components. For junior or entry-level roles, he brings strong computer science fundamentals, modular coding discipline, and enthusiasm to learn and deliver within an engineering team.',
+    relevantLinks: [
+      { label: 'Explore Verified Projects', url: '#projects' },
+      { label: 'Technical Skills', url: '#skills' },
+      { label: 'Get in Touch', url: '#contact' },
+    ],
+  },
+  {
+    question: 'Why should we hire Leopold for a software engineering role?',
+    category: 'Professional Reasoning',
+    keywords: ['why hire', 'why should we hire', 'hire him', 'reasons to hire', 'candidate'],
+    answer: 'Recruiters and hiring managers consider Leopold because of his solid foundation in backend systems, distributed architectures, and relational databases. Rather than solely building tutorial apps, he has authored real, working software: a Java RMI distributed system for flood disaster coordination, an enterprise Oracle PL/SQL database with automated audit triggers, and a React Native campus mobile app. He demonstrates clean code habits, 3NF schema design, and eagerness to contribute to engineering teams.',
+    relevantLinks: [
+      { label: 'View Verified Projects', url: '#projects' },
+      { label: 'Download Curriculum Vitae', url: '/Leopold_MUGISHA_CV.pdf' },
+      { label: 'Contact Section', url: '#contact' },
+    ],
+  },
+  {
+    question: 'What makes Leopold a good candidate for a junior developer role?',
+    category: 'Professional Reasoning',
+    keywords: ['junior developer', 'junior role', 'good candidate', 'entry level', 'suitability'],
+    answer: 'Leopold is well-suited for junior or associate software engineering positions because he combines formal academic computer science training with hands-on multi-tier development. He writes clean, modular code, understands relational normalization (3NF) and ACID transactions, builds secure REST APIs with JWT authentication, and collaborates effectively using Git version control.',
+    relevantLinks: [
+      { label: 'Skills Section', url: '#skills' },
+      { label: 'Featured Projects', url: '#projects' },
+    ],
+  },
+  {
+    question: 'Which of Leopold’s projects best demonstrates his backend skills?',
+    category: 'Professional Reasoning',
+    keywords: ['best backend', 'demonstrates backend', 'strongest backend', 'backend project', 'server project'],
+    answer: 'Two projects strongly demonstrate his backend and database capabilities:\n1. **Hazard Management System:** Features a multi-threaded Java RMI distributed server handling remote procedure calls, client synchronization, and transactional JDBC queries to MySQL.\n2. **Oracle SQL Employee Management System:** Showcases advanced enterprise database engineering with PL/SQL stored procedures, packages, complex views, and automated audit triggers ensuring zero data anomalies.',
+    relevantLinks: [
+      { label: 'Hazard System Case Study', url: '/projects/hazard-management-system' },
+      { label: 'Oracle PL/SQL Repository', url: 'https://github.com/leopoldbonfils/oracle_sql_employee_management_system' },
+    ],
+  },
+  {
+    question: 'Which project should a recruiter or reviewer look at first?',
+    category: 'Professional Reasoning',
+    keywords: ['review first', 'which project first', 'start reviewing', 'first project', 'recommended project'],
+    answer: 'For backend and distributed systems reviewers, we recommend starting with the **Hazard Management System** (Java RMI & MySQL) or the **Oracle SQL Employee Management System** (PL/SQL packages and triggers). For reviewers evaluating full-stack and mobile capabilities, start with the **Campus Intranet Mobile App** (React Native & Node.js REST API).',
+    relevantLinks: [
+      { label: 'Featured Projects', url: '#projects' },
+      { label: 'Complete Projects Archive', url: '/projects' },
+    ],
+  },
+  {
+    question: 'What are Leopold’s strongest technical areas?',
+    category: 'Professional Reasoning',
+    keywords: ['strongest technical areas', 'strongest areas', 'core strengths', 'key strengths'],
+    answer: 'Leopold’s strongest technical areas are:\n1. **Relational Database Design & Integrity:** 3NF normalization, PL/SQL packages, stored procedures, audit triggers, and ACID transactions in Oracle Database and MySQL.\n2. **Backend Services & Distributed Architecture:** Java RMI client-server coordination, Node.js/Express.js REST APIs, and JWT authentication.\n3. **Practical Problem-Solving:** Translating real-world operational workflows (disaster response, campus communication, permit booking) into functional, testable software.',
+    relevantLinks: [
+      { label: 'Skills Section', url: '#skills' },
+      { label: 'Verified Projects', url: '#projects' },
+    ],
+  },
+  {
+    question: 'What kind of problems can Leopold solve?',
+    category: 'Professional Reasoning',
+    keywords: ['problems can you solve', 'what kind of problems', 'problems solved', 'capabilities'],
+    answer: 'Leopold designs software to solve real operational, administrative, and community challenges:\n• **Emergency Coordination:** Streamlined incident reporting and responder dispatching for flood crisis response in Rubavu District (Hazard Management System).\n• **Administrative Integrity:** Prevented salary discrepancies and maintained historic employee audit trails (Oracle SQL Employee Management).\n• **Campus Communication:** Eliminated fragmented bulletin boards with mobile schedule and grade access (Campus Intranet App).\n• **Resource Scheduling:** Prevented appointment double-booking for driver license applicants (Driver Permit Booking System).',
+    relevantLinks: [
+      { label: 'Explore Projects Section', url: '#projects' },
+    ],
+  },
+
+  // 12. General Software Engineering Concepts (Level 3)
+  {
+    question: 'What is database normalization and how does Leopold apply it?',
+    category: 'Software Engineering Concepts',
+    keywords: ['database normalization', 'normalization', '1nf', '2nf', '3nf', 'bcnf', 'anomalies'],
+    answer: 'Database normalization is the process of structuring a relational database schema to minimize data redundancy and prevent insertion, update, and deletion anomalies. It progresses through normal forms:\n• **1NF:** Eliminates repeating groups and ensures atomic column values.\n• **2NF:** Achieves 1NF and removes partial dependencies on composite primary keys.\n• **3NF:** Achieves 2NF and eliminates transitive dependencies (non-key attributes dependent on other non-key attributes).\n\nLeopold strictly applies 3NF schema design across his database projects (including the Oracle SQL Employee Management System, MySQL Hazard Management System, and Permit Booking portal) to guarantee data consistency and integrity.',
+    relevantLinks: [
+      { label: 'Oracle SQL Repository', url: 'https://github.com/leopoldbonfils/oracle_sql_employee_management_system' },
+      { label: 'Skills Section', url: '#skills' },
+    ],
+  },
+  {
+    question: 'How does JWT authentication work and where was it used?',
+    category: 'Software Engineering Concepts',
+    keywords: ['jwt', 'json web token', 'jwt authentication', 'bearer token', 'token authentication'],
+    answer: 'JSON Web Token (JWT) is an open standard (RFC 7519) for securely transmitting information between parties as a compact, URL-safe JSON object. A JWT consists of three parts separated by dots:\n1. **Header:** Contains the token type (JWT) and signing algorithm (e.g., HS256).\n2. **Payload:** Contains claims such as user ID, role, and expiration timestamp.\n3. **Signature:** Cryptographically generated using the header, payload, and a secret server key.\n\nBecause the token is cryptographically signed, the server can verify identity statelessly without querying session stores on every request. Leopold implemented JWT authentication in the Campus Intranet mobile application to secure communication between the React Native client and Node.js/Express API endpoints.',
+    relevantLinks: [
+      { label: 'Campus Intranet App Repo', url: 'https://github.com/Danieljospin1/Auca_intranet_app' },
+      { label: 'Mobile Case Study', url: '/projects/auca-intranet-app' },
+    ],
+  },
+  {
+    question: 'What is the difference between frontend and backend development?',
+    category: 'Software Engineering Concepts',
+    keywords: ['difference between frontend and backend', 'frontend vs backend', 'frontend and backend'],
+    answer: '• **Frontend Development:** Focuses on the client-side user experience—everything the user sees and interacts with in a browser or mobile app. This involves UI layout, responsive styling, client state management, and user interaction (e.g., React, Next.js, React Native, Tailwind CSS, HTML5/CSS3).\n• **Backend Development:** Focuses on server-side logic, database interactions, authentication, security, and data persistence. This includes building RESTful APIs, handling business rules, managing database transactions, and coordinating distributed services (e.g., Node.js, Express.js, Java RMI, Oracle PL/SQL, MySQL).\n\nLeopold works across both domains as a full-stack developer, designing responsive client interfaces that communicate seamlessly with secure, normalized backend and database services.',
+    relevantLinks: [
+      { label: 'Skills Section', url: '#skills' },
+      { label: 'Featured Projects', url: '#projects' },
+    ],
+  },
+  {
+    question: 'How would you design a REST API?',
+    category: 'Software Engineering Concepts',
+    keywords: ['design a rest api', 'rest api design', 'restful api', 'api design principles'],
+    answer: 'A well-designed REST API adheres to key architectural principles:\n1. **Resource-Oriented URIs:** Use nouns representing resources rather than verbs (e.g., `/api/announcements` or `/api/timetables/:id`).\n2. **Standard HTTP Methods:** Use GET (read), POST (create), PUT/PATCH (update), and DELETE (remove) predictably.\n3. **Stateless Communication:** Each request must contain all necessary authentication (e.g., JWT Bearer tokens) and context.\n4. **Meaningful HTTP Status Codes:** Return standard codes like 200 (OK), 201 (Created), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), and 500 (Server Error).\n5. **Input Validation & Structured JSON Errors:** Validate payloads against schemas and return consistent error structures.\n\nLeopold applied these principles when building the Node.js/Express REST API endpoints for the Campus Intranet mobile application.',
+    relevantLinks: [
+      { label: 'Campus Intranet Case Study', url: '/projects/auca-intranet-app' },
+      { label: 'Skills Section', url: '#skills' },
+    ],
+  },
+  {
+    question: 'How can a relational database maintain data integrity?',
+    category: 'Software Engineering Concepts',
+    keywords: ['maintain data integrity', 'data integrity', 'database integrity', 'acid', 'constraints', 'triggers'],
+    answer: 'Relational databases maintain data integrity through several multi-layered mechanisms:\n1. **Entity Integrity:** Enforced by PRIMARY KEY constraints to guarantee uniqueness and non-null identifiers.\n2. **Referential Integrity:** Enforced by FOREIGN KEY constraints to prevent orphaned records across related tables.\n3. **Domain Integrity:** Enforced by data types, NOT NULL rules, and CHECK constraints.\n4. **User-Defined Integrity:** Business rules implemented via database triggers and stored procedures (e.g., validating salary bounds before insert/update).\n5. **ACID Transactions:** Atomicity, Consistency, Isolation, and Durability ensure all-or-nothing operations with automatic rollback on error.\n\nLeopold applied these safeguards in his Oracle SQL Employee Management System using PL/SQL packages and audit triggers to ensure zero data corruption.',
+    relevantLinks: [
+      { label: 'Oracle PL/SQL Repository', url: 'https://github.com/leopoldbonfils/oracle_sql_employee_management_system' },
+      { label: 'Skills Section', url: '#skills' },
+    ],
+  },
+  {
+    question: 'What is Java RMI and how was it used in the Hazard Management System?',
+    category: 'Software Engineering Concepts',
+    keywords: ['java rmi', 'remote method invocation', 'rmi server', 'distributed java'],
+    answer: 'Java Remote Method Invocation (RMI) is a mechanism that allows an object running on one Java Virtual Machine (JVM) to invoke methods on an object executing in another JVM across a network. It uses stubs (client proxies) and skeletons (server dispatchers) to marshal and unmarshal parameters over network sockets.\n\nIn the Hazard Management System, Leopold used Java RMI to build a centralized server architecture coordinating flood emergency response terminals in Rubavu District. Field reporting clients invoked remote server methods to record incidents and query relief inventory in real-time with synchronized JDBC database persistence.',
+    relevantLinks: [
+      { label: 'Hazard Management System Repo', url: 'https://github.com/leopoldbonfils/HazardManagementSystemRMIServer' },
+      { label: 'Case Study', url: '/projects/hazard-management-system' },
     ],
   },
 ];
