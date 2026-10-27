@@ -123,30 +123,40 @@ export default function AIChatWidget() {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#181510] hover:bg-[#221e17] text-[#ded8cd] hover:text-white border border-[#302a20] hover:border-accent shadow-2xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-accent"
+          className="group relative flex items-center gap-3.5 px-5 py-3.5 sm:px-6 sm:py-4 rounded-full bg-[#16130e]/95 hover:bg-[#201b14] text-[#f4efe6] hover:text-white border-2 border-accent/50 hover:border-accent shadow-2xl shadow-accent/20 hover:shadow-accent/35 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-accent backdrop-blur-md hover:scale-105"
           aria-expanded={isOpen}
           aria-label="Open Bobo Assistance"
         >
-          <div className="relative w-6 h-6 flex items-center justify-center">
-            <span className="w-2.5 h-2.5 rounded-full bg-accent absolute -top-0.5 -right-0.5 animate-ping opacity-75" />
+          {/* Logo container with pulse & glow */}
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 border border-accent/40 flex items-center justify-center p-1 shadow-inner group-hover:border-accent transition-colors">
+            <span className="w-3 h-3 rounded-full bg-accent absolute -top-0.5 -right-0.5 animate-ping opacity-75" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute -top-0.5 -right-0.5 border border-[#16130e]" />
             <Image
               src="/bobo-assistant-logo.png"
               alt="Bobo Assistance Logo"
-              width={24}
-              height={24}
-              className="w-5 h-5 object-contain rounded-full group-hover:scale-110 transition-transform duration-300"
+              width={40}
+              height={40}
+              className="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-full group-hover:scale-110 transition-transform duration-300"
             />
           </div>
-          <span className="text-xs font-mono font-medium tracking-tight">
-            Bobo Assistance
-          </span>
+
+          {/* Typography */}
+          <div className="flex flex-col text-left">
+            <span className="text-sm sm:text-base font-bold text-[#f5f1e9] tracking-tight group-hover:text-accent transition-colors">
+              Bobo Assistance
+            </span>
+            <span className="text-[11px] font-mono text-[#a39c8f] flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Ask about Leopold</span>
+            </span>
+          </div>
         </button>
       </div>
 
       {/* Floating Chat Modal Panel */}
       {isOpen && (
         <div
-          className="fixed bottom-20 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[420px] max-h-[600px] h-[82vh] rounded-2xl bg-[#0e0d0b]/95 border border-[#2b271f] shadow-2xl shadow-black/80 backdrop-blur-xl flex flex-col overflow-hidden animate-fade-in"
+          className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[420px] max-h-[600px] h-[82vh] rounded-2xl bg-[#0e0d0b]/95 border border-[#2b271f] shadow-2xl shadow-black/80 backdrop-blur-xl flex flex-col overflow-hidden animate-fade-in"
           role="dialog"
           aria-modal="true"
           aria-labelledby="ai-chat-title"
@@ -154,21 +164,21 @@ export default function AIChatWidget() {
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3.5 border-b border-[#211e18] bg-[#14120e]">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-white/5 border border-[#332c21] flex items-center justify-center overflow-hidden p-1 shadow-inner">
+              <div className="w-10 h-10 rounded-full bg-white/10 border border-accent/40 flex items-center justify-center overflow-hidden p-1 shadow-inner">
                 <Image
                   src="/bobo-assistant-logo.png"
                   alt="Bobo Assistance"
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-contain"
+                  width={36}
+                  height={36}
+                  className="w-8 h-8 object-contain"
                 />
               </div>
               <div className="flex flex-col">
-                <span id="ai-chat-title" className="text-xs font-bold text-[#f2ede4] flex items-center gap-1.5">
+                <span id="ai-chat-title" className="text-sm font-bold text-[#f2ede4] flex items-center gap-1.5">
                   Bobo Assistance
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" title="Online" />
                 </span>
-                <span className="text-[10px] font-mono text-[#8a8376]">
+                <span className="text-[11px] font-mono text-[#8a8376]">
                   Leopold's Verified Portfolio Assistant
                 </span>
               </div>
