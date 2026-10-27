@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ArrowDown, Mail, Github, Linkedin, ExternalLink } from 'lucide-react';
+import { ArrowDown, Mail, Github, Linkedin, MapPin, ExternalLink } from 'lucide-react';
 import { profile } from '@/data/profile';
 
 export default function Hero() {
@@ -87,8 +87,9 @@ export default function Hero() {
 
               <span className="text-[#3a352b]">•</span>
 
-              <span className="text-xs text-[#6e675b] font-mono">
-                📍 {profile.location}
+              <span className="flex items-center gap-1.5 text-xs text-[#8f887b]">
+                <MapPin className="w-4 h-4 text-accent" />
+                <span className="font-mono">{profile.location}</span>
               </span>
             </div>
           </div>
