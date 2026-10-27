@@ -22,7 +22,7 @@ Your mission is to help recruiters, engineering managers, prospective collaborat
 THREE-LEVEL ANSWERING STRATEGY:
 Level 1: Verified Personal Facts
 - Ground every personal and portfolio fact strictly in the verified knowledge base below.
-- Full name: Mugisha Leopold Bonfils. Location: Kigali, Rwanda (Gasabo District, Gatsata Sector, Nyamugari Cell).
+- Full name: Mugisha Leopold Bonfils. Location: Kigali, Rwanda (Gasabo District).
 - Education: Pursuing B.Sc. in Software Engineering at the Adventist University of Central Africa (AUCA) in Kigali (2023–2026, expected completion 2026). Prior: Advanced Level at Groupe Scolaire Muhura (2019–2022). Keep AUCA references limited strictly to education-related responses.
 - Verified Projects: 1) Hazard Management System (Java RMI, MySQL), 2) Campus Intranet App (React Native, Node.js/Express, MySQL), 3) Oracle SQL Employee Management System (PL/SQL packages, audit triggers), 4) Online Driver Permit Booking System (PHP, MySQL), 5) Provisoire-Exam Platform (PHP, JS), 6) FilmNet (JS, PHP).
 - Contact: leopordbonfils@gmail.com, +250 784 403 935, GitHub: leopoldbonfils, LinkedIn: mugisha-leopold-697124420.
@@ -1038,16 +1038,19 @@ export function getDeterministicAnswer(
     };
   }
 
-  // 9. Mobile App General
+  // 9. Mobile App General & Recommendations
   if (
     query.includes('mobile app') ||
+    query.includes('mobile application') ||
+    query.includes('mobile project') ||
     query.includes('react native') ||
     query.includes('android app') ||
-    query.includes('ios app')
+    query.includes('ios app') ||
+    (query.includes('mobile') && (query.includes('project') || query.includes('suited') || query.includes('recommend') || query.includes('built')))
   ) {
     const mobileProject = projects.find((p) => p.slug === 'auca-intranet-app')!;
     return {
-      answer: `Yes, Leopold contributed to the **Campus Intranet App**, a cross-platform mobile application developed with **React Native** and a **Node.js/Express REST API**.\n\n• **Purpose:** Centralized campus portal giving university students, lecturers, and staff secure access to announcements, lecture schedules, and exam results.\n• **Architecture:** React Native client with local offline caching communicating over HTTPS with an Express.js backend and MySQL database.`,
+      answer: `The project best suited for mobile application requirements is the **Campus Intranet Mobile App** (developed with **React Native**).\n\n• **Purpose:** Centralized campus portal providing university students, lecturers, and staff secure access to announcements, lecture schedules, and exam results.\n• **Architecture:** React Native client with local offline caching communicating over HTTPS with an Express.js REST API and MySQL database.\n• **Key Features:** Role-based authentication, offline timetable caching, exam grade viewer, and academic noticeboards.\n• **Leopold's Role:** Contributed to RESTful API endpoints for timetable and announcement delivery, integrated student authentication, and structured mobile state management.`,
       sources: [
         { label: 'Campus Intranet GitHub Repo', url: mobileProject.githubUrl },
         { label: 'Mobile Case Study', url: `/projects/${mobileProject.slug}` },
@@ -1068,7 +1071,7 @@ export function getDeterministicAnswer(
     query.includes('gatsata')
   ) {
     return {
-      answer: `Leopold Mugisha is based in **Kigali, Rwanda** (Gasabo District, Gatsata Sector, Nyamugari Cell).\n\nHe is currently studying Software Engineering in Kigali and is actively **open to software engineering internships, junior developer roles, and full-stack collaborations** (on-site in Kigali, hybrid, or remote worldwide).`,
+      answer: `Leopold Mugisha is based in **Kigali, Rwanda** (Gasabo District).\n\nHe is currently studying Software Engineering in Kigali and is actively **open to software engineering internships, junior developer roles, and full-stack collaborations** (on-site in Kigali, hybrid, or remote worldwide).`,
       sources: [
         { label: 'Contact Section', url: '#contact' },
         { label: 'Email Leopold', url: `mailto:${profile.email}` },

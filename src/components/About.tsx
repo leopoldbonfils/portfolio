@@ -86,7 +86,7 @@ export default function About() {
                 </div>
               </div>
               <p className="text-xs text-[#8c8477]">
-                Gasabo District, Nyamugari Cell. Available for on-site, hybrid, or remote engineering teams worldwide.
+                Gasabo District. Available for on-site, hybrid, or remote engineering teams worldwide.
               </p>
             </div>
 

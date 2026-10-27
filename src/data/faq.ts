@@ -35,7 +35,7 @@ export const faqList: FAQItem[] = [
     question: 'Where is Leopold based and where does he live?',
     category: 'Profile & Biography',
     keywords: ['where', 'live', 'location', 'based', 'city', 'country', 'rwanda', 'kigali', 'gasabo', 'gatsata', 'residence'],
-    answer: 'Leopold is based in Kigali, Rwanda (Gasabo District, Gatsata Sector, Nyamugari Cell). He is available for on-site roles in Kigali, hybrid arrangements, or remote software engineering collaborations worldwide.',
+    answer: 'Leopold is based in Kigali, Rwanda (Gasabo District). He is available for on-site roles in Kigali, hybrid arrangements, or remote software engineering collaborations worldwide.',
     relevantLinks: [
       { label: 'Contact Section', url: '#contact' },
       { label: 'Email Leopold', url: 'mailto:leopordbonfils@gmail.com' },

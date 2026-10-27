@@ -1,8 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AI_SYSTEM_PROMPT, getDeterministicAnswer, ChatMessage } from '@/lib/ai-assistant';
 
+const ipRequestMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const MAX_REQUESTS_PER_WINDOW = 60;
+
 export async function POST(req: NextRequest) {
   try {
+    const forwardedFor = req.headers.get('x-forwarded-for');
+    const ip = forwardedFor ? forwardedFor.split(',')[0].trim() : '127.0.0.1';
+    const now = Date.now();
+    const clientRecord = ipRequestMap.get(ip);
+
+    if (clientRecord && now < clientRecord.resetTime) {
+      if (clientRecord.count >= MAX_REQUESTS_PER_WINDOW) {
+        return NextResponse.json(
+          { error: 'Too many requests. Please wait a moment before sending another message.' },
+          { status: 429 }
+        );
+      }
+      clientRecord.count += 1;
+    } else {
+      ipRequestMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+    }
+
     const body = await req.json();
     const messages: ChatMessage[] = body.messages;
 
