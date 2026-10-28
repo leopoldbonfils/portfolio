@@ -23,7 +23,7 @@ export const profile: ProfileData = {
   fullName: 'Mugisha Leopold Bonfils',
   role: 'Full-Stack Developer',
   headline: 'Building thoughtful digital products, from intuitive interfaces to reliable backend systems.',
-  shortBio: 'Software engineering student focused on clean architecture, relational databases, backend APIs, and modern responsive web applications.',
+  shortBio: 'Software Engineer focused on clean architecture, relational databases, backend APIs, and modern responsive web applications.',
   fullBio: [
     'I am currently pursuing a Bachelor of Science in Software Engineering in Kigali, Rwanda.',
     'My core focus centers on building practical, reliable applications—spanning distributed Java RMI systems for disaster hazard management, complex Oracle PL/SQL database systems, RESTful Node.js APIs, and modern React & React Native client interfaces.',

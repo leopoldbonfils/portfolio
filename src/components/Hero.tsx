@@ -23,7 +23,7 @@ export default function Hero() {
             {/* Title / Name */}
             <div className="flex flex-col gap-2">
               <span className="text-xs uppercase tracking-widest font-mono text-accent">
-                Full-Stack Developer • Student
+                Full-Stack Developer • Software Engineer
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#f5f1e9] leading-[1.1]">
                 {profile.name}
@@ -37,7 +37,7 @@ export default function Hero() {
 
             {/* Short verified description */}
             <p className="text-sm sm:text-base text-[#8f887b] leading-relaxed max-w-xl">
-              Software engineering student passionate about distributed systems, relational database architecture, and building thoughtful digital products that address real-world challenges.
+              Software engineer passionate about distributed systems, relational database architecture, and building thoughtful digital products that address real-world challenges.
             </p>
 
             {/* CTAs */}

@@ -12,7 +12,7 @@ export interface ExperienceItem {
 export const experienceList: ExperienceItem[] = [
   {
     period: '2023 — Present',
-    role: 'Student Software Engineer & System Architect',
+    role: 'Software Engineer & System Architect',
     organization: 'Academic & Collaborative Engineering Projects',
     type: 'Software Engineering',
     location: 'Kigali, Rwanda',
@@ -21,7 +21,7 @@ export const experienceList: ExperienceItem[] = [
     highlights: [
       'Architected Java RMI distributed client-server application for disaster hazard coordination during Rubavu district flooding.',
       'Authored production-level Oracle PL/SQL stored procedures and automated audit triggers for enterprise employee management.',
-      'Contributed to the Campus Intranet mobile application for centralized student scheduling and grade communications.',
+      'Contributed to the Campus Intranet mobile application for centralized academic scheduling and grade communications.',
       'Built and open-sourced driving permit booking and license preparation software in PHP & MySQL.'
     ]
   },

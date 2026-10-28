@@ -15,14 +15,14 @@ export interface AssistantResponse {
   sources?: { label: string; url: string }[];
 }
 
-export const AI_SYSTEM_PROMPT = `You are the AI portfolio assistant representing Leopold Mugisha (Mugisha Leopold Bonfils), a Full-Stack Developer and Software Engineering student in Kigali, Rwanda.
+export const AI_SYSTEM_PROMPT = `You are the AI portfolio assistant representing Leopold Mugisha (Mugisha Leopold Bonfils), a Full-Stack Developer and Software Engineer in Kigali, Rwanda.
 
 Your mission is to help recruiters, engineering managers, prospective collaborators, and portfolio visitors understand Leopold's actual verified technical skills, real software systems, academic background, and contact options.
 
 THREE-LEVEL ANSWERING STRATEGY:
 Level 1: Verified Personal Facts
 - Ground every personal and portfolio fact strictly in the verified knowledge base below.
-- Full name: Mugisha Leopold Bonfils. Location: Kigali, Rwanda (Gasabo District).
+- Full name: Mugisha Leopold Bonfils. Location: Kigali, Rwanda.
 - Education: Pursuing B.Sc. in Software Engineering at the Adventist University of Central Africa (AUCA) in Kigali (2023–2026, expected completion 2026). Prior: Advanced Level at Groupe Scolaire Muhura (2019–2022). Keep AUCA references limited strictly to education-related responses.
 - Verified Projects: 1) Hazard Management System (Java RMI, MySQL), 2) Campus Intranet App (React Native, Node.js/Express, MySQL), 3) Oracle SQL Employee Management System (PL/SQL packages, audit triggers), 4) Online Driver Permit Booking System (PHP, MySQL), 5) Provisoire-Exam Platform (PHP, JS), 6) FilmNet (JS, PHP).
 - Contact: leopordbonfils@gmail.com, +250 784 403 935, GitHub: leopoldbonfils, LinkedIn: mugisha-leopold-697124420.
@@ -153,6 +153,132 @@ export function detectLastDiscussedProject(history?: ChatMessage[]): Project | n
   return null;
 }
 
+export type AssistantIntent =
+  | 'self-description'
+  | 'professional-strengths'
+  | 'introduction'
+  | 'professional-value'
+  | 'hiring'
+  | 'education'
+  | 'biography'
+  | 'spoken-languages'
+  | 'skills'
+  | 'projects'
+  | 'project-comparison'
+  | 'technical-explanation'
+  | 'programming-language'
+  | 'database'
+  | 'experience-availability'
+  | 'contact'
+  | 'missing-personal-fact'
+  | 'greeting'
+  | 'thanks'
+  | 'follow-up'
+  | 'ambiguous'
+  | 'general-conversation';
+
+export function classifyIntent(userQuery: string): AssistantIntent {
+  const query = normalizeQueryText(userQuery);
+
+  if (/\b(describe yourself|describe yourself in|what are you like|personality|personal traits|three words)\b/.test(query)) {
+    return 'self-description';
+  }
+  if (/\b(favorite|favourite|how old|age|birthday|marital status|religion|home address|personal address|family)\b/.test(query)) {
+    return 'missing-personal-fact';
+  }
+  if (/\b(strengths?|weakness(?:es)?|areas for improvement|what are you good at)\b/.test(query)) {
+    return 'professional-strengths';
+  }
+  if (/\b(introduce yourself|tell me about yourself|personal introduction)\b/.test(query)) {
+    return 'introduction';
+  }
+  if (/\b(why should we hire|why hire|hire you|what value|value could you bring|value can you bring|what can you contribute|what would you bring)\b/.test(query)) {
+    return query.includes('hire') ? 'hiring' : 'professional-value';
+  }
+  if (/\b(compare|comparison|difference between)\b/.test(query) && /\b(project|system|app|hazard|oracle|intranet|permit|filmnet|provisoire)\b/.test(query)) {
+    return 'project-comparison';
+  }
+  if (/\b(contact|email|phone|whatsapp|linkedin|github|social profile|reach)\b/.test(query)) {
+    return 'contact';
+  }
+  if (/\b(education|degree|university|college|school|study|studies|career goal|career goals|graduate|graduation)\b/.test(query)) {
+    return 'education';
+  }
+  if (/\b(project|built|portfolio|hazard|intranet|filmnet|provisoire|permit booking|employee management|freshlink|tega|nile|dioli)\b/.test(query)) {
+    return 'projects';
+  }
+  if (/\b(rest(?:ful)? apis?|jwt|json web token|database normalization|normal form|acid|java rmi|remote method invocation|programming concept|explain .*apis?|what is an api)\b/.test(query)) {
+    return 'technical-explanation';
+  }
+  if (/\b(programming languages?|which languages|what languages|coding languages?)\b/.test(query)) {
+    return 'programming-language';
+  }
+  if (/\b(database|databases|mysql|oracle|sql|pl\/sql)\b/.test(query)) {
+    return 'database';
+  }
+  if (/\b(technical skills|skills|tech stack|technologies|what tools)\b/.test(query)) {
+    return 'skills';
+  }
+  if (/\b(experience|internship|intern|availability|available|employment|job|career|work history)\b/.test(query)) {
+    return 'experience-availability';
+  }
+  if (/\b(languages does .* speak|spoken language|kinyarwanda|speak)\b/.test(query)) {
+    return 'spoken-languages';
+  }
+  if (/\b(who is|who are you|tell me about|about leopold|about him|bio|profile|full name|what do you do|where|location|based|live)\b/.test(query)) {
+    return 'biography';
+  }
+  if (/^(hi|hello|hey|good morning|good evening|amakuru|how are you|how is it going|what's up)\b/.test(query)) {
+    return 'greeting';
+  }
+  if (/^(thanks|thank you|thx)\b/.test(query)) {
+    return 'thanks';
+  }
+  if (/\b(it|that|those|this|the same|what about that|tell me more)\b/.test(query)) {
+    return 'follow-up';
+  }
+  if (/^(what do you think|can you explain|what about|which one|is it good)\b/.test(query)) {
+    return 'ambiguous';
+  }
+  return 'general-conversation';
+}
+
+export function isProviderAnswerRelevant(
+  intent: AssistantIntent,
+  userQuery: string,
+  answer: string
+): boolean {
+  if (!answer.trim() || answer.length > 5000) return false;
+  const query = normalizeQueryText(userQuery);
+  const response = normalizeQueryText(answer);
+
+  if (intent === 'general-conversation') {
+    const stopWords = new Set([
+      'what', 'when', 'where', 'which', 'who', 'why', 'how', 'does', 'did',
+      'have', 'has', 'your', 'you', 'the', 'and', 'for', 'with', 'about',
+      'could', 'would', 'should', 'please', 'tell', 'explain',
+    ]);
+    const queryTerms = query
+      .replace(/[^a-z0-9\s]/g, '')
+      .split(/\s+/)
+      .filter((term) => term.length >= 4 && !stopWords.has(term));
+    return queryTerms.some((term) => response.includes(term));
+  }
+
+  if (intent !== 'technical-explanation') return true;
+
+  const requestedConcepts: [RegExp, RegExp][] = [
+    [/\b(rest|restful|api|http|endpoint)\b/, /\b(rest|restful|api|http|endpoint|resource|stateless)\b/],
+    [/\b(jwt|json web token|authentication)\b/, /\b(jwt|json web token|authentication|token)\b/],
+    [/\b(normalization|normal form|1nf|2nf|3nf)\b/, /\b(normalization|normal form|1nf|2nf|3nf)\b/],
+    [/\b(acid|transaction|data integrity)\b/, /\b(acid|transaction|data integrity|atomicity|consistency)\b/],
+    [/\b(java rmi|remote method invocation|rmi)\b/, /\b(java rmi|remote method invocation|rmi)\b/],
+  ];
+
+  const matchingConcept = requestedConcepts.find(([queryPattern]) => queryPattern.test(query));
+  return matchingConcept ? matchingConcept[1].test(response) : true;
+}
+
 // Stop words to exclude when calculating keyword overlap against FAQ entries
 const FAQ_STOP_WORDS = new Set([
   'what', 'where', 'when', 'which', 'who', 'whom', 'whose', 'why', 'how',
@@ -183,7 +309,7 @@ export function getDeterministicAnswer(
     )
   ) {
     return {
-      answer: `No, Leopold has not been employed at corporate tech giants (such as Google, Apple, Meta, Netflix, Amazon, Microsoft, Stripe, or OpenAI), nor has he worked as a corporate executive. His verified engineering background is as a dedicated Software Engineering student in Kigali (2023–2026), where he has built practical distributed systems (Java RMI), enterprise databases (Oracle PL/SQL), and cross-platform mobile apps.`,
+      answer: `No, Leopold has not been employed at corporate tech giants (such as Google, Apple, Meta, Netflix, Amazon, Microsoft, Stripe, or OpenAI), nor has he worked as a corporate executive. His verified engineering background is as a dedicated Software Engineer in Kigali (2023–2026), where he has built practical distributed systems (Java RMI), enterprise databases (Oracle PL/SQL), and cross-platform mobile apps.`,
       sources: [
         { label: 'View Real Experience', url: '#experience' },
         { label: 'Download Curriculum Vitae', url: profile.resumeUrl },
@@ -309,6 +435,54 @@ export function getDeterministicAnswer(
         { label: 'Verified GitHub Profile', url: profile.github },
         { label: 'Explore Verified Projects', url: '#projects' },
       ],
+    };
+  }
+
+  if (classifyIntent(query) === 'self-description') {
+    return {
+      answer: `I'd describe myself as curious, adaptable, and solution-oriented. Those are evidence-based impressions from my portfolio: I have worked across distributed systems, mobile apps, web applications, and relational databases, and my projects focus on practical problems. The work reflects learning across different technologies and adapting them to each project's needs.`,
+      sources: [
+        { label: 'About Section', url: '#about' },
+        { label: 'Verified Projects', url: '#projects' },
+      ],
+    };
+  }
+
+  if (classifyIntent(query) === 'professional-strengths') {
+    return {
+      answer: `My strongest demonstrated areas are practical problem-solving, backend and distributed systems, and relational database design. My portfolio supports this through the Java RMI Hazard Management System, Node.js/Express services for the Campus Intranet App, and Oracle PL/SQL and MySQL projects. I can discuss specific strengths in more detail against the requirements of a role. I do not have a verified personal account of weaknesses, so I would not want to invent one.`,
+      sources: [
+        { label: 'Technical Skills', url: '#skills' },
+        { label: 'Verified Projects', url: '#projects' },
+      ],
+    };
+  }
+
+  if (classifyIntent(query) === 'introduction') {
+    return {
+      answer: `I’m Leopold Mugisha, a Full-Stack Developer and Software Engineer. My portfolio focuses on practical software: backend and distributed systems, relational databases, mobile applications, and responsive web development. My documented projects include a Java RMI hazard management system, a React Native campus app, and Oracle PL/SQL database work.`,
+      sources: [
+        { label: 'About Section', url: '#about' },
+        { label: 'Education Section', url: '#education' },
+        { label: 'Verified Projects', url: '#projects' },
+      ],
+    };
+  }
+
+  if (classifyIntent(query) === 'ambiguous') {
+    return {
+      answer: `Could you clarify what you'd like to know—for example, Leopold's background, a specific project, his technical skills, or a software engineering concept?`,
+      sources: [
+        { label: 'Explore Projects', url: '#projects' },
+        { label: 'Technical Skills', url: '#skills' },
+      ],
+    };
+  }
+
+  if (classifyIntent(query) === 'thanks') {
+    return {
+      answer: `You're welcome! I can help with Leopold's background, verified projects, technical skills, or contact details.`,
+      sources: [{ label: 'Explore Projects', url: '#projects' }],
     };
   }
 
@@ -525,7 +699,7 @@ export function getDeterministicAnswer(
       (query.includes('java rmi') && query.includes('react native'))
     ) {
       return {
-        answer: `**Comparison: Hazard Management System vs. Campus Intranet Mobile App**\n\n• **Domain & Goal:** The Hazard Management System is a disaster response coordination platform built for flood crises in Rubavu District, Western Rwanda. The Campus Intranet App is an academic and administrative mobile portal for university students and faculty.\n• **Architecture:** Hazard Management uses a multi-tier client-server architecture powered by Java RMI (Remote Method Invocation) and multi-threaded JDBC database persistence. The Campus Intranet App uses a decoupled client-server model with a React Native mobile client communicating over HTTPS with an Express.js REST API.\n• **Technology Stack:** Java, Java RMI, Swing, and MySQL vs. React Native, Node.js, Express.js, MySQL, and JWT authentication with local offline caching.\n• **Target Users:** First responders and civil protection administrators vs. students, lecturers, and university staff.`,
+        answer: `**Comparison: Hazard Management System vs. Campus Intranet Mobile App**\n\n• **Domain & Goal:** The Hazard Management System is a disaster response coordination platform built for flood crises in Rubavu District, Western Rwanda. The Campus Intranet App is an academic and administrative mobile portal for university campus and faculty.\n• **Architecture:** Hazard Management uses a multi-tier client-server architecture powered by Java RMI (Remote Method Invocation) and multi-threaded JDBC database persistence. The Campus Intranet App uses a decoupled client-server model with a React Native mobile client communicating over HTTPS with an Express.js REST API.\n• **Technology Stack:** Java, Java RMI, Swing, and MySQL vs. React Native, Node.js, Express.js, MySQL, and JWT authentication with local offline caching.\n• **Target Users:** First responders and civil protection administrators vs. campus users, lecturers, and university staff.`,
         sources: [
           { label: 'Hazard System Case Study', url: '/projects/hazard-management-system' },
           { label: 'Campus Intranet Case Study', url: '/projects/auca-intranet-app' },
@@ -778,6 +952,11 @@ export function getDeterministicAnswer(
 
   // D. REST API Design
   if (
+    query.includes('explain rest api') ||
+    query.includes('explain restful api') ||
+    query.includes('what is a rest api') ||
+    query.includes('what is rest api') ||
+    query.includes('what are rest apis') ||
     query.includes('design a rest api') ||
     query.includes('how would you design a rest api') ||
     query.includes('rest api design') ||
@@ -1050,7 +1229,7 @@ export function getDeterministicAnswer(
   ) {
     const mobileProject = projects.find((p) => p.slug === 'auca-intranet-app')!;
     return {
-      answer: `The project best suited for mobile application requirements is the **Campus Intranet Mobile App** (developed with **React Native**).\n\n• **Purpose:** Centralized campus portal providing university students, lecturers, and staff secure access to announcements, lecture schedules, and exam results.\n• **Architecture:** React Native client with local offline caching communicating over HTTPS with an Express.js REST API and MySQL database.\n• **Key Features:** Role-based authentication, offline timetable caching, exam grade viewer, and academic noticeboards.\n• **Leopold's Role:** Contributed to RESTful API endpoints for timetable and announcement delivery, integrated student authentication, and structured mobile state management.`,
+      answer: `The project best suited for mobile application requirements is the **Campus Intranet Mobile App** (developed with **React Native**).\n\n• **Purpose:** Centralized campus portal providing university users, lecturers, and staff secure access to announcements, lecture schedules, and exam results.\n• **Architecture:** React Native client with local offline caching communicating over HTTPS with an Express.js REST API and MySQL database.\n• **Key Features:** Role-based authentication, offline timetable caching, exam grade viewer, and academic noticeboards.\n• **Leopold's Role:** Contributed to RESTful API endpoints for timetable and announcement delivery, integrated user authentication, and structured mobile state management.`,
       sources: [
         { label: 'Campus Intranet GitHub Repo', url: mobileProject.githubUrl },
         { label: 'Mobile Case Study', url: `/projects/${mobileProject.slug}` },
@@ -1071,7 +1250,7 @@ export function getDeterministicAnswer(
     query.includes('gatsata')
   ) {
     return {
-      answer: `Leopold Mugisha is based in **Kigali, Rwanda** (Gasabo District).\n\nHe is currently studying Software Engineering in Kigali and is actively **open to software engineering internships, junior developer roles, and full-stack collaborations** (on-site in Kigali, hybrid, or remote worldwide).`,
+      answer: `Leopold Mugisha is based in **Kigali, Rwanda**.\n\nHe is currently studying Software Engineering in Kigali and is actively **open to software engineering internships, junior developer roles, and full-stack collaborations** (on-site in Kigali, hybrid, or remote worldwide).`,
       sources: [
         { label: 'Contact Section', url: '#contact' },
         { label: 'Email Leopold', url: `mailto:${profile.email}` },
@@ -1089,6 +1268,9 @@ export function getDeterministicAnswer(
     query.startsWith('hey ') ||
     query.includes('good morning') ||
     query.includes('good evening') ||
+    query.startsWith('how are you') ||
+    query.startsWith('how is it going') ||
+    query.startsWith("what's up") ||
     query === 'amakuru' ||
     query.includes('bite')
   ) {
@@ -1117,7 +1299,7 @@ export function getDeterministicAnswer(
     query.includes('leopold bonfils')
   ) {
     return {
-      answer: `**Leopold Mugisha** (full name: *Mugisha Leopold Bonfils*) is a Full-Stack Developer and Software Engineering student in Kigali, Rwanda.\n\nHe specializes in building reliable, practical software systems:\n• **Distributed Systems:** Java & Java RMI client-server applications\n• **Enterprise Databases:** Oracle PL/SQL stored procedures, packages, audit triggers, and MySQL\n• **Mobile Development:** Cross-platform React Native apps\n• **Modern Web Engineering:** Next.js 14, React, PHP, Tailwind CSS\n\nHe is known for clean code, 3NF schema normalization, and designing tools that solve community and administrative problems in Rwanda.`,
+      answer: `**Leopold Mugisha** (full name: *Mugisha Leopold Bonfils*) is a Full-Stack Developer and Software Engineer in Kigali, Rwanda.\n\nHe specializes in building reliable, practical software systems:\n• **Distributed Systems:** Java & Java RMI client-server applications\n• **Enterprise Databases:** Oracle PL/SQL stored procedures, packages, audit triggers, and MySQL\n• **Mobile Development:** Cross-platform React Native apps\n• **Modern Web Engineering:** Next.js 14, React, PHP, Tailwind CSS\n\nHe is known for clean code, 3NF schema normalization, and designing tools that solve community and administrative problems in Rwanda.`,
       sources: [
         { label: 'Explore About Section', url: '#about' },
         { label: 'GitHub Profile', url: profile.github },
@@ -1274,7 +1456,7 @@ export function getDeterministicAnswer(
 
   // 20. Truthful Missing-Information Fallback
   return {
-    answer: `I do not have verified information in Leopold Mugisha's portfolio knowledge base regarding "${userQuery}".\n\nAs his AI portfolio assistant, I can provide factual information regarding:\n• **Location:** Kigali, Rwanda (Gasabo District)\n• **Verified Projects:** Hazard Management System (Java RMI), Campus Intranet App (React Native), Oracle SQL Employee Management, Driver Permit Booking (PHP)\n• **Skills:** Java, Oracle PL/SQL, MySQL, React, React Native, Node.js, Next.js\n• **Education:** B.Sc. in Software Engineering at AUCA (2023–2026)\n• **Contact & Hiring:** Open to internships and junior full-stack roles\n\nPlease let me know if you would like to explore any of these verified areas!`,
+    answer: `I do not have verified information in Leopold Mugisha's portfolio knowledge base regarding "${userQuery}".\n\nAs his AI portfolio assistant, I can provide factual information regarding:\n• **Location:** Kigali, Rwanda\n• **Verified Projects:** Hazard Management System (Java RMI), Campus Intranet App (React Native), Oracle SQL Employee Management, Driver Permit Booking (PHP)\n• **Skills:** Java, Oracle PL/SQL, MySQL, React, React Native, Node.js, Next.js\n• **Education:** B.Sc. in Software Engineering at AUCA (2023–2026)\n• **Contact & Hiring:** Open to internships and junior full-stack roles\n\nPlease let me know if you would like to explore any of these verified areas!`,
     sources: [
       { label: 'Explore Verified Projects', url: '#projects' },
       { label: 'Technical Skills', url: '#skills' },

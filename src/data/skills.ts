@@ -34,7 +34,7 @@ export const skillCategories: SkillCategory[] = [
     title: 'Backend, Distributed Systems & APIs',
     description: 'Server architectures, distributed computing, and RESTful service layers.',
     skills: [
-      { name: 'Node.js & Express.js', level: 'Proficient', verifiedContext: 'Built REST API endpoints for Campus Intranet student portal' },
+      { name: 'Node.js & Express.js', level: 'Proficient', verifiedContext: 'Built REST API endpoints for Campus Intranet portal' },
       { name: 'Java RMI (Remote Method Invocation)', level: 'Proficient', verifiedContext: 'Implemented distributed client-server event coordination' },
       { name: 'RESTful API Design', level: 'Proficient', verifiedContext: 'JSON schemas, status codes, query pagination, secure authentication' },
       { name: 'Authentication & Security', level: 'Intermediate', verifiedContext: 'JWT token lifecycles, password hashing, SQL injection prevention' }

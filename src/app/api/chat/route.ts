@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { AI_SYSTEM_PROMPT, getDeterministicAnswer, ChatMessage } from '@/lib/ai-assistant';
+import {
+  AI_SYSTEM_PROMPT,
+  classifyIntent,
+  getDeterministicAnswer,
+  isProviderAnswerRelevant,
+  ChatMessage,
+} from '@/lib/ai-assistant';
 
 const ipRequestMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
@@ -52,8 +58,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Limit conversation context to last 6 messages
+    // Keep history only for explicit follow-ups; unrelated prior topics must not
+    // influence the current answer.
     const recentHistory = messages.slice(-6);
+    const intent = classifyIntent(lastUserMessage);
+
+    if (intent !== 'technical-explanation' && intent !== 'general-conversation') {
+      const answer = getDeterministicAnswer(lastUserMessage, recentHistory);
+      return NextResponse.json({
+        role: 'assistant',
+        content: answer.answer,
+        sources: answer.sources,
+        provider: 'verified-knowledge-engine',
+      });
+    }
+
+    const providerHistory: ChatMessage[] = [{ role: 'user', content: lastUserMessage }];
 
     const geminiKey = process.env.GEMINI_API_KEY?.trim();
     const openaiKey = process.env.OPENAI_API_KEY?.trim();
@@ -69,7 +89,7 @@ export async function POST(req: NextRequest) {
       for (const model of candidateModels) {
         try {
           // Format multi-turn conversation with system instruction
-          const formattedHistory = recentHistory.map((m) => ({
+          const formattedHistory = providerHistory.map((m) => ({
             role: m.role === 'assistant' ? 'model' : 'user',
             parts: [{ text: m.content }],
           }));
@@ -101,10 +121,13 @@ export async function POST(req: NextRequest) {
             const candidateText =
               data.candidates?.[0]?.content?.parts?.[0]?.text;
 
-            if (candidateText) {
+            if (
+              typeof candidateText === 'string' &&
+              isProviderAnswerRelevant(intent, lastUserMessage, candidateText)
+            ) {
               return NextResponse.json({
                 role: 'assistant',
-                content: candidateText,
+                content: candidateText.trim(),
                 provider: model,
               });
             }
@@ -128,7 +151,7 @@ export async function POST(req: NextRequest) {
             model: 'gpt-4o-mini',
             messages: [
               { role: 'system', content: AI_SYSTEM_PROMPT },
-              ...recentHistory.map((m) => ({ role: m.role, content: m.content })),
+              ...providerHistory.map((m) => ({ role: m.role, content: m.content })),
             ],
             temperature: 0.3,
             max_tokens: 500,
@@ -139,10 +162,13 @@ export async function POST(req: NextRequest) {
         if (openaiRes.ok) {
           const data = await openaiRes.json();
           const text = data.choices?.[0]?.message?.content;
-          if (text) {
+          if (
+            typeof text === 'string' &&
+            isProviderAnswerRelevant(intent, lastUserMessage, text)
+          ) {
             return NextResponse.json({
               role: 'assistant',
-              content: text,
+              content: text.trim(),
               provider: 'gpt-4o-mini',
             });
           }

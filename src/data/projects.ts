@@ -45,14 +45,14 @@ export const projects: Project[] = [
     title: 'Campus Intranet Mobile App',
     category: 'Mobile',
     featured: true,
-    shortDescription: 'Centralized mobile campus portal for academic, administrative, and student communication services.',
-    fullDescription: 'Cross-platform mobile application providing students, lecturers, and university administration secure access to campus announcements, course timetables, exam results, and academic resources.',
+    shortDescription: 'Centralized mobile campus portal for academic, administrative, and campus communication services.',
+    fullDescription: 'Cross-platform mobile application providing learners, lecturers, and university administration secure access to campus announcements, course timetables, exam results, and academic resources.',
     technologies: ['React Native', 'Node.js', 'Express.js', 'MySQL', 'REST API', 'JWT Auth'],
-    myRole: 'Full-Stack Contributor: Built RESTful API endpoints for timetable and announcement delivery, integrated student authentication, and structured mobile state management.',
-    problemSolved: 'Students previously had to consult fragmented physical noticeboards and disjointed portals to access academic announcements, schedules, and grade releases.',
+    myRole: 'Full-Stack Contributor: Built RESTful API endpoints for timetable and announcement delivery, integrated user authentication, and structured mobile state management.',
+    problemSolved: 'Users previously had to consult fragmented physical noticeboards and disjointed portals to access academic announcements, schedules, and grade releases.',
     architecture: 'React Native mobile client communicating over HTTPS with an Express.js REST API layer backed by an optimized MySQL relational database schema.',
     keyFeatures: [
-      'Role-based authentication for Students, Faculty, and Administrators',
+      'Role-based authentication for Campus Users, Faculty, and Administrators',
       'Real-time academic noticeboard and push notification channels',
       'Personalized semester course schedule and lecture hall timetable',
       'Confidential exam grade and transcript viewer'
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     fullDescription: 'An interactive self-assessment examination tool mimicking the official traffic code and road regulation testing format in Rwanda, featuring randomized question banks and instant score diagnostics.',
     technologies: ['JavaScript', 'HTML5', 'CSS3', 'PHP', 'Local State Management'],
     myRole: 'Sole Developer: Designed the question presentation engine, timer controller, scoring algorithm, and responsive UI.',
-    problemSolved: 'Helps students prepare systematically for Rwanda’s competitive traffic law exams with instant feedback on incorrect answers.',
+    problemSolved: 'Helps candidates prepare systematically for Rwanda’s competitive traffic law exams with instant feedback on incorrect answers.',
     architecture: 'Lightweight web app utilizing client-side evaluation engines with PHP test session recording and randomized question selection.',
     keyFeatures: [
       'Timed practice tests mirroring official 20-question formats',
@@ -124,7 +124,7 @@ export const projects: Project[] = [
       'High-contrast, mobile-optimized test interface'
     ],
     challengesAndSolutions: 'Designed a resilient state tracker that prevents test resets if candidate accidentally refreshes browser during a test run.',
-    verifiedOutcome: 'Widely used educational tool assisting peer students in passing their theoretical driving assessments.',
+    verifiedOutcome: 'Widely used educational tool assisting candidates in passing their theoretical driving assessments.',
     githubUrl: 'https://github.com/leopoldbonfils/Provisoire-Exam',
     status: 'Completed & Open Source'
   },

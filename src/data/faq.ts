@@ -24,7 +24,7 @@ export const faqList: FAQItem[] = [
     question: 'Who is Leopold Mugisha?',
     category: 'Profile & Biography',
     keywords: ['who', 'leopold', 'mugisha', 'bonfils', 'about', 'bio', 'profile', 'developer', 'identity'],
-    answer: 'Leopold Mugisha (Mugisha Leopold Bonfils) is a Full-Stack Developer and Software Engineering student in Kigali, Rwanda. He specializes in distributed Java systems (Java RMI), enterprise relational databases (Oracle PL/SQL & MySQL), cross-platform mobile apps (React Native), and modern responsive web applications (Next.js, React, PHP).',
+    answer: 'Leopold Mugisha (Mugisha Leopold Bonfils) is a Full-Stack Developer and Software Engineer in Kigali, Rwanda. He specializes in distributed Java systems (Java RMI), enterprise relational databases (Oracle PL/SQL & MySQL), cross-platform mobile apps (React Native), and modern responsive web applications (Next.js, React, PHP).',
     relevantLinks: [
       { label: 'GitHub Profile', url: 'https://github.com/leopoldbonfils' },
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/mugisha-leopold-697124420/' },
@@ -34,8 +34,8 @@ export const faqList: FAQItem[] = [
   {
     question: 'Where is Leopold based and where does he live?',
     category: 'Profile & Biography',
-    keywords: ['where', 'live', 'location', 'based', 'city', 'country', 'rwanda', 'kigali', 'gasabo', 'gatsata', 'residence'],
-    answer: 'Leopold is based in Kigali, Rwanda (Gasabo District). He is available for on-site roles in Kigali, hybrid arrangements, or remote software engineering collaborations worldwide.',
+    keywords: ['where', 'live', 'location', 'based', 'city', 'country', 'rwanda', 'kigali', 'residence'],
+    answer: 'Leopold is based in Kigali, Rwanda. He is available for on-site roles in Kigali, hybrid arrangements, or remote software engineering collaborations worldwide.',
     relevantLinks: [
       { label: 'Contact Section', url: '#contact' },
       { label: 'Email Leopold', url: 'mailto:leopordbonfils@gmail.com' },
@@ -115,7 +115,7 @@ export const faqList: FAQItem[] = [
     question: 'Has Leopold built any mobile applications?',
     category: 'Technical Skills',
     keywords: ['mobile', 'react native', 'app', 'android', 'ios', 'cross-platform', 'mobile developer'],
-    answer: 'Yes. Leopold contributed to the Campus Intranet App, a cross-platform mobile application developed with React Native and Node.js. It features student authentication, offline course schedule caching, push notices, and grade inquiry channels.',
+    answer: 'Yes. Leopold contributed to the Campus Intranet App, a cross-platform mobile application developed with React Native and Node.js. It features user authentication, offline course schedule caching, push notices, and grade inquiry channels.',
     relevantLinks: [
       { label: 'Campus Intranet App Repo', url: 'https://github.com/Danieljospin1/Auca_intranet_app' },
       { label: 'Mobile Case Study', url: '/projects/auca-intranet-app' },
@@ -147,8 +147,8 @@ export const faqList: FAQItem[] = [
   {
     question: 'Tell me about the Campus Intranet Mobile App.',
     category: 'Verified Projects',
-    keywords: ['auca app', 'auca intranet', 'intranet', 'campus app', 'student app', 'timetable', 'grades'],
-    answer: 'The Campus Intranet App is a cross-platform mobile campus portal built with React Native, Node.js, Express.js, and MySQL. It centralizes student course schedules, lecture timetables, exam results, and administrative announcements with JWT authentication and offline caching.',
+    keywords: ['auca app', 'auca intranet', 'intranet', 'campus app', 'academic app', 'timetable', 'grades'],
+    answer: 'The Campus Intranet App is a cross-platform mobile campus portal built with React Native, Node.js, Express.js, and MySQL. It centralizes course schedules, lecture timetables, exam results, and administrative announcements with JWT authentication and offline caching.',
     relevantLinks: [
       { label: 'Campus Intranet GitHub Repo', url: 'https://github.com/Danieljospin1/Auca_intranet_app' },
       { label: 'View Case Study', url: '/projects/auca-intranet-app' },
@@ -223,7 +223,7 @@ export const faqList: FAQItem[] = [
   {
     question: 'What is Leopold’s professional experience level?',
     category: 'Experience & Journey',
-    keywords: ['experience', 'years of experience', 'seniority', 'junior', 'intern', 'employment', 'career', 'student engineer'],
+    keywords: ['experience', 'years of experience', 'seniority', 'junior', 'intern', 'employment', 'career', 'software engineer'],
     answer: 'Leopold is an emerging Software Engineer with 2+ years of hands-on academic, project-based, and collaborative engineering experience. His work is characterized by designing real, functional software systems (distributed Java RMI, PL/SQL databases, and mobile apps). He does not claim decades of corporate employment, but brings deep dedication, solid computer science fundamentals, and clean coding discipline.',
     relevantLinks: [
       { label: 'Experience Timeline', url: '#experience' },

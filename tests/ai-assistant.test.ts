@@ -1,4 +1,10 @@
-import { getDeterministicAnswer, ChatMessage, AssistantResponse } from '../src/lib/ai-assistant';
+import {
+  classifyIntent,
+  getDeterministicAnswer,
+  isProviderAnswerRelevant,
+  ChatMessage,
+  AssistantResponse,
+} from '../src/lib/ai-assistant';
 import { suggestedQuestions } from '../src/data/faq';
 import { profile } from '../src/data/profile';
 import { projects } from '../src/data/projects';
@@ -146,14 +152,15 @@ runAssertion({
 runAssertion({
   category: 'Profile & Biography',
   query: 'where leopold live',
-  expectedKeywords: ['Kigali', 'Rwanda', 'Gasabo'],
+  expectedKeywords: ['Kigali', 'Rwanda'],
+  forbiddenKeywords: ['Gasabo', 'Gatsata'],
   minSources: 1,
 });
 
 runAssertion({
   category: 'Profile & Biography',
   query: 'Who is Leopold Mugisha?',
-  expectedKeywords: ['Mugisha Leopold Bonfils', 'Software Engineering'],
+  expectedKeywords: ['Mugisha Leopold Bonfils', 'Software Engineer'],
   minSources: 2,
   expectedSourceUrls: ['github.com', 'linkedin.com'],
 });
@@ -165,6 +172,126 @@ runAssertion({
   minSources: 1,
   expectedSourceUrls: ['#about'],
 });
+
+// -----------------------------------------------------------------------------
+// 1a. Intent Recognition & Personal Questions
+// -----------------------------------------------------------------------------
+const priorRestConversation: ChatMessage[] = [
+  { role: 'user', content: 'Explain REST APIs.' },
+  { role: 'assistant', content: 'REST APIs expose resources over HTTP.' },
+];
+const priorPersonalConversation: ChatMessage[] = [
+  { role: 'user', content: 'How would you describe yourself in three words?' },
+  { role: 'assistant', content: 'Curious, adaptable, and solution-oriented.' },
+];
+
+runAssertion({
+  category: 'Intent Recognition',
+  query: 'How would you describe yourself in three words?',
+  history: priorRestConversation,
+  expectedKeywords: ['curious', 'adaptable', 'solution-oriented'],
+  forbiddenKeywords: ['architectural principles', 'http methods'],
+  minSources: 1,
+});
+
+runAssertion({
+  category: 'Intent Recognition',
+  query: 'What are your three biggest strengths?',
+  expectedKeywords: ['problem-solving', 'backend', 'database design'],
+  forbiddenKeywords: ['architectural principles'],
+});
+
+runAssertion({
+  category: 'Intent Recognition',
+  query: 'Introduce yourself.',
+  expectedKeywords: ['Leopold Mugisha', 'Full-Stack Developer', 'Software Engineer'],
+  forbiddenKeywords: ['architectural principles'],
+  minSources: 1,
+});
+
+runAssertion({
+  category: 'Professional Reasoning',
+  query: 'Why should we hire you?',
+  expectedKeywords: ['Java RMI', '3NF', 'REST APIs', 'Git'],
+  forbiddenKeywords: ['architectural principles'],
+});
+
+runAssertion({
+  category: 'Professional Reasoning',
+  query: 'What value could you bring to our company?',
+  expectedKeywords: ['documented projects', 'full-stack', 'backend', 'relational databases'],
+  forbiddenKeywords: ['architectural principles'],
+});
+
+runAssertion({
+  category: 'Technical Explanation',
+  query: 'Explain REST APIs.',
+  history: priorPersonalConversation,
+  expectedKeywords: ['architectural principles', 'resource-oriented', 'HTTP methods'],
+  forbiddenKeywords: ['curious, adaptable'],
+});
+
+runAssertion({
+  category: 'Ambiguous Questions',
+  query: 'What do you think?',
+  expectedKeywords: ['clarify', 'specific project', 'software engineering concept'],
+});
+
+runAssertion({
+  category: 'Missing Personal Facts',
+  query: 'What is your favorite color?',
+  expectedKeywords: ['do not have verified information', 'favorite color'],
+  forbiddenKeywords: ['architectural principles', 'HTTP methods'],
+});
+
+for (const [query, expected] of [
+  ['Introduce yourself.', 'introduction'],
+  ['Why should we hire you?', 'hiring'],
+  ['What value could you bring to our company?', 'professional-value'],
+  ['Compare the Hazard System and Campus App.', 'project-comparison'],
+  ['Explain REST APIs.', 'technical-explanation'],
+  ['Which programming languages do you know?', 'programming-language'],
+  ['What databases have you used?', 'database'],
+  ['Where can I find your LinkedIn?', 'contact'],
+  ['Thanks!', 'thanks'],
+] as const) {
+  const actual = classifyIntent(query);
+  if (actual !== expected) {
+    results.push({
+      category: 'Intent Classification',
+      query,
+      passed: false,
+      notes: `Expected ${expected}, received ${actual}`,
+    });
+  } else {
+    results.push({
+      category: 'Intent Classification',
+      query,
+      passed: true,
+      notes: `Classified as ${actual}`,
+    });
+  }
+}
+
+for (const [answer, expected, label] of [
+  ['Serverless computing runs code in managed environments on demand.', true, 'on-topic'],
+  ['REST APIs use resource-oriented URIs and HTTP methods.', false, 'off-topic'],
+] as const) {
+  const actual = isProviderAnswerRelevant(
+    'general-conversation',
+    'What are your thoughts on serverless?',
+    answer
+  );
+  const passed = actual === expected;
+  results.push({
+    category: 'Provider Relevance',
+    query: `General conversation rejects ${label} mismatch`,
+    passed,
+    notes: passed
+      ? `Relevance check returned ${actual}`
+      : `Expected ${expected}, received ${actual}`,
+  });
+}
 
 // -----------------------------------------------------------------------------
 // 2. Education & Academics
@@ -843,7 +970,7 @@ runAssertion({
 runAssertion({
   category: 'Personal Profile Queries',
   query: 'Tell me about Leopold Bonfils.',
-  expectedKeywords: ['Mugisha Leopold Bonfils', 'Software Engineering'],
+  expectedKeywords: ['Mugisha Leopold Bonfils', 'Software Engineer'],
   minSources: 2,
   expectedSourceUrls: ['#about'],
 });
@@ -935,7 +1062,7 @@ const suggestedExpected: Record<
   { expectedKeywords: string[]; minSources: number; expectedUrlSubstrings: string[] }
 > = {
   'Who is Leopold Mugisha?': {
-    expectedKeywords: ['Mugisha Leopold Bonfils', 'Software Engineering'],
+    expectedKeywords: ['Mugisha Leopold Bonfils', 'Software Engineer'],
     minSources: 2,
     expectedUrlSubstrings: ['github.com', 'linkedin.com'],
   },

@@ -120,7 +120,7 @@ async function runApiTests() {
       process.env.OPENAI_API_KEY = '';
 
       const mockGeminiReply =
-        'Mocked Gemini response: Leopold Mugisha is a software engineer based in Kigali.';
+        'Mocked Gemini response: REST APIs expose resources through HTTP methods such as GET and POST.';
 
       global.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
         const urlStr = input.toString();
@@ -145,7 +145,7 @@ async function runApiTests() {
       };
 
       const req = createNextRequest({
-        messages: [{ role: 'user', content: 'Who is Leopold?' }],
+        messages: [{ role: 'user', content: 'Explain REST APIs.' }],
       });
       const res = await POST(req);
       const data = await res.json();
@@ -212,7 +212,7 @@ async function runApiTests() {
       process.env.OPENAI_API_KEY = 'mock-openai-key-67890';
 
       const mockOpenAIReply =
-        'Mocked OpenAI response: Leopold built the Hazard Management System with Java RMI.';
+        'Mocked OpenAI response: REST APIs expose resources through HTTP methods such as GET and POST.';
 
       global.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
         const urlStr = input.toString();
@@ -235,7 +235,7 @@ async function runApiTests() {
       };
 
       const req = createNextRequest({
-        messages: [{ role: 'user', content: 'Tell me about the Hazard Management System' }],
+        messages: [{ role: 'user', content: 'Explain REST APIs.' }],
       });
       const res = await POST(req);
       const data = await res.json();
@@ -250,6 +250,161 @@ async function runApiTests() {
         passed,
         notes: passed
           ? `Status 200, provider=${data.provider}, content matched`
+          : `Failed: status=${res.status}, body=${JSON.stringify(data)}`,
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // Test 8: Topic Change Ignores Stale Technical History
+    // -------------------------------------------------------------------------
+    {
+      process.env.GEMINI_API_KEY = 'mock-stale-response-key';
+      process.env.OPENAI_API_KEY = '';
+      let providerCalls = 0;
+      global.fetch = async (): Promise<Response> => {
+        providerCalls += 1;
+        return new Response(
+          JSON.stringify({
+            candidates: [
+              {
+                content: {
+                  parts: [{ text: 'REST APIs follow resource-oriented architectural principles.' }],
+                },
+              },
+            ],
+          }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
+      };
+
+      const req = createNextRequest({
+        messages: [
+          { role: 'user', content: 'Explain REST APIs.' },
+          { role: 'assistant', content: 'REST APIs expose resources over HTTP.' },
+          { role: 'user', content: 'How would you describe yourself in three words?' },
+        ],
+      });
+      const res = await POST(req);
+      const data = await res.json();
+      const content = String(data.content || '').toLowerCase();
+      const passed =
+        res.status === 200 &&
+        providerCalls === 0 &&
+        data.provider === 'verified-knowledge-engine' &&
+        content.includes('curious') &&
+        content.includes('adaptable') &&
+        !content.includes('architectural principles');
+
+      apiResults.push({
+        name: 'Topic Change: Personal question after REST uses verified personal answer',
+        passed,
+        notes: passed
+          ? 'Personal intent answered deterministically; stale response provider was not called'
+          : `Failed: status=${res.status}, calls=${providerCalls}, body=${JSON.stringify(data)}`,
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // Test 9: Empty Provider Content Falls Back to a Relevant Technical Answer
+    // -------------------------------------------------------------------------
+    {
+      process.env.GEMINI_API_KEY = 'mock-empty-response-key';
+      process.env.OPENAI_API_KEY = '';
+
+      global.fetch = async (): Promise<Response> =>
+        new Response(
+          JSON.stringify({ candidates: [{ content: { parts: [{ text: '   ' }] } }] }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
+
+      const req = createNextRequest({
+        messages: [{ role: 'user', content: 'Explain REST APIs.' }],
+      });
+      const res = await POST(req);
+      const data = await res.json();
+      const passed =
+        res.status === 200 &&
+        data.provider === 'verified-knowledge-engine' &&
+        data.content.includes('Resource-Oriented URIs') &&
+        data.content.includes('HTTP Methods');
+
+      apiResults.push({
+        name: 'Empty Gemini Response: Falls back to matching REST explanation',
+        passed,
+        notes: passed
+          ? 'Empty candidate rejected and deterministic technical answer returned'
+          : `Failed: status=${res.status}, body=${JSON.stringify(data)}`,
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // Test 10: Irrelevant Provider Content Is Rejected
+    // -------------------------------------------------------------------------
+    {
+      process.env.GEMINI_API_KEY = 'mock-irrelevant-response-key';
+      process.env.OPENAI_API_KEY = '';
+
+      global.fetch = async (): Promise<Response> =>
+        new Response(
+          JSON.stringify({
+            candidates: [
+              {
+                content: {
+                  parts: [{ text: 'Leopold is curious, adaptable, and solution-oriented.' }],
+                },
+              },
+            ],
+          }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
+
+      const req = createNextRequest({
+        messages: [{ role: 'user', content: 'Explain REST APIs.' }],
+      });
+      const res = await POST(req);
+      const data = await res.json();
+      const passed =
+        res.status === 200 &&
+        data.provider === 'verified-knowledge-engine' &&
+        data.content.includes('Resource-Oriented URIs') &&
+        !data.content.includes('solution-oriented');
+
+      apiResults.push({
+        name: 'Irrelevant Gemini Content: Rejected in favor of current technical intent',
+        passed,
+        notes: passed
+          ? 'Off-topic model output rejected; matching REST explanation returned'
+          : `Failed: status=${res.status}, body=${JSON.stringify(data)}`,
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // Test 11: Technical Question After Personal Question Remains Technical
+    // -------------------------------------------------------------------------
+    {
+      process.env.GEMINI_API_KEY = '';
+      process.env.OPENAI_API_KEY = '';
+
+      const req = createNextRequest({
+        messages: [
+          { role: 'user', content: 'How would you describe yourself in three words?' },
+          { role: 'assistant', content: 'Curious, adaptable, and solution-oriented.' },
+          { role: 'user', content: 'Explain REST APIs.' },
+        ],
+      });
+      const res = await POST(req);
+      const data = await res.json();
+      const passed =
+        res.status === 200 &&
+        data.provider === 'verified-knowledge-engine' &&
+        data.content.includes('Resource-Oriented URIs') &&
+        data.content.includes('HTTP Methods');
+
+      apiResults.push({
+        name: 'Topic Change: Technical question after personal question gets technical answer',
+        passed,
+        notes: passed
+          ? 'Current technical intent answered without inheriting personal context'
           : `Failed: status=${res.status}, body=${JSON.stringify(data)}`,
       });
     }

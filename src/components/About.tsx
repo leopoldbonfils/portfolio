@@ -69,7 +69,7 @@ export default function About() {
                 </div>
               </div>
               <p className="text-xs text-[#8c8477]">
-                Software Engineering student (2023–2026). In-depth coursework in Distributed Systems, PL/SQL, Java OOP, and Software Architecture.
+                Software Engineering (2023–2026). In-depth coursework in Distributed Systems, PL/SQL, Java OOP, and Software Architecture.
               </p>
             </div>
 
