@@ -20,7 +20,7 @@ export interface ProfileData {
 
 export const profile: ProfileData = {
   name: 'Leopold Mugisha',
-  fullName: 'Mugisha Leopold Bonfils',
+  fullName: 'Mugisha Leopold',
   role: 'Full-Stack Developer',
   headline: 'Building thoughtful digital products, from intuitive interfaces to reliable backend systems.',
   shortBio: 'Software Engineer focused on clean architecture, relational databases, backend APIs, and modern responsive web applications.',

@@ -7,7 +7,7 @@ import AIChatWidget from '@/components/AIChatWidget';
 import { profile } from '@/data/profile';
 
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.role}`,
+  title: `${profile.name} - ${profile.role}`,
   description: `${profile.role} & Software Engineer in Kigali, Rwanda. Practical web applications, distributed Java systems, Oracle PL/SQL, React Native, and clean code.`,
   keywords: [
     'Leopold Mugisha',
